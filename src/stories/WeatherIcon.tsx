@@ -51,6 +51,7 @@ export type WeatherIconProps = Partial<{
   featured: boolean;
   divider: boolean;
   className?: string;
+  classNameDot?: string;
   children?: React.ReactNode;
 }>;
 
@@ -60,6 +61,7 @@ export const WeatherIcon = ({
   featured,
   divider,
   className,
+  classNameDot,
   children,
 }: WeatherIconProps) => {
   const classNames = clsx(
@@ -73,7 +75,7 @@ export const WeatherIcon = ({
     { "border-black": !featured },
     { "border-blue-500": featured },
     { "-rotate-45": featured },
-    "relative",
+    "relative scale-75",
 
     "before:content-[''] before:absolute before:top-0 before:bottom-0 before:left-1/2 before:-translate-x-1/2",
     "before:w-[2px]",
@@ -87,7 +89,7 @@ export const WeatherIcon = ({
         <div
           className={`absolute top-1/2 left-1/2 -translate-1/2 w-2 h-2 bg-yellow-400 rounded-full border-1 ${
             !filled ? "border-black" : "border-black"
-          }`}
+          } ${classNameDot}`}
         />
       )}
       <div
@@ -102,23 +104,35 @@ export const WeatherIcon = ({
 };
 
 export const WeatherIconCold = (props: WeatherIconProps) => (
-  <WeatherIcon {...props} filled />
+  <WeatherIcon {...props} filled classNameDot="border-white border-1" />
 );
 export const WeatherIconBrisk = (props: WeatherIconProps) => (
-  <WeatherIcon {...props} filled divider />
+  <WeatherIcon {...props} filled divider classNameDot="border-white border-1" />
 );
 export const WeatherIconCool = (props: WeatherIconProps) => (
   <WeatherIcon
     {...props}
     featured
-    className="-rotate-45 border-black bg-gradient-to-br from-black from-50% to-white to-50%"
+    className="-rotate-45 border-blue-500 bg-gradient-to-br from-blue-500 from-50% to-white to-50%"
+    classNameDot="border-blue-500"
   />
 );
 export const WeatherIconMild = (props: WeatherIconProps) => (
-  <WeatherIcon {...props} filled featured className="bg-blue-500" />
+  <WeatherIcon
+    {...props}
+    filled
+    featured
+    className="bg-blue-500"
+    classNameDot="border-white border-1"
+  />
 );
 export const WeatherIconWarm = (props: WeatherIconProps) => (
-  <WeatherIcon {...props} featured className="border-blue-500" />
+  <WeatherIcon
+    {...props}
+    featured
+    className="border-blue-500"
+    classNameDot="border-blue-500"
+  />
 );
 export const WeatherIconHot = (props: WeatherIconProps) => (
   <WeatherIcon {...props} divider />
