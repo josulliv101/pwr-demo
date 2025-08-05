@@ -2,17 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 
 // import { fn } from "storybook/test";
 import { Cloud, Sun } from "lucide-react";
-import {
-  WeatherIcon,
-  WeatherIconBrisk,
-  WeatherIconCold,
-  WeatherIconCool,
-  WeatherIconHot,
-  WeatherIconMild,
-  WeatherIconVeryHot,
-  WeatherIconWarm,
-  weatherIconMap2,
-} from "./WeatherIcon";
+import { WeatherIcon, weatherIconMap2 } from "./WeatherIcon";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
