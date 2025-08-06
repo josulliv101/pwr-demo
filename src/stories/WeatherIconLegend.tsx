@@ -5,6 +5,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { weatherIconMap2 } from "./WeatherIcon";
+import type { PropsWithChildren } from "react";
 
 const weatherDetails = {
   cold: {
@@ -44,7 +45,7 @@ const weatherDetails = {
   },
 } as const;
 
-export default function WeatherLegend() {
+export default function WeatherLegend({ children }: PropsWithChildren<{}>) {
   return (
     <div className="p-8 bg-white">
       <h2 className="text-2xl font-bold text-center mb-8 text-gray-800">
@@ -61,11 +62,12 @@ export default function WeatherLegend() {
               return (
                 <Tooltip key={key}>
                   <TooltipTrigger asChild>
-                    <div className="flex flex-col items-center space-y-3 cursor-pointer hover:scale-105 transition-transform duration-200">
-                      <div className="flex items-center justify-center w-12 h-12 bg-gray-50 rounded-lg border-none border-gray-200   transition-all duration-200">
+                    <div className="flex flex-col items-center space-y-3 cursor-pointer hover:bg-accent _hover:scale-105 transition-transform duration-200">
+                      <div className="flex flex-col items-center justify-center w-12 h-12 bg-gray-50 rounded-lg border-none border-gray-200   transition-all duration-200">
                         <IconComponent />
+                        {/* <IconComponent dot /> */}
                       </div>
-                      <span className="text-xs font-medium text-gray-700 text-center">
+                      <span className="text-xs font-medium text-gray-700 text-center break-words whitespace-break-spaces">
                         {label}
                       </span>
                     </div>
@@ -94,12 +96,7 @@ export default function WeatherLegend() {
           )}
         </div>
       </TooltipProvider>
-
-      <div className="mt-12 text-center">
-        <p className="text-sm text-gray-500">
-          Hover over each icon to see detailed weather information
-        </p>
-      </div>
+      {children}
     </div>
   );
 }
