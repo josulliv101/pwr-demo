@@ -142,16 +142,46 @@ export const WeatherIconVeryHot = (props: WeatherIconProps) => (
 );
 
 export const weatherIconMap2 = {
-  cold: { label: "Cold", component: WeatherIconCold },
-  brisk: { label: "Brisk", component: WeatherIconBrisk },
-  cool: { label: "Cool", component: WeatherIconCool },
-  mild: { label: "Mild", component: WeatherIconMild },
-
-  warm: { label: "Warm", component: WeatherIconWarm },
-
-  hot: { label: "Hot", component: WeatherIconHot },
+  cold: {
+    label: "Cold",
+    component: WeatherIconCold,
+    description:
+      "Very cold temperatures, typically below 32°F (0°C). Bundle up with heavy winter clothing!",
+  },
+  brisk: {
+    label: "Brisk",
+    component: WeatherIconBrisk,
+    description:
+      "Cool and refreshing weather around 40-50°F (4-10°C). Perfect for outdoor activities with a light jacket.",
+  },
+  cool: {
+    label: "Cool",
+    component: WeatherIconCool,
+    description:
+      "Pleasantly cool temperatures around 50-65°F (10-18°C). Light layers recommended.",
+  },
+  mild: {
+    label: "Mild",
+    component: WeatherIconMild,
+    description:
+      "Comfortable mild weather around 65-75°F (18-24°C). Ideal for most outdoor activities.",
+  },
+  warm: {
+    label: "Warm",
+    component: WeatherIconWarm,
+    description:
+      "Warm and pleasant temperatures around 75-85°F (24-29°C). Great for swimming and outdoor fun.",
+  },
+  hot: {
+    label: "Hot",
+    component: WeatherIconHot,
+    description:
+      "Hot weather around 85-95°F (29-35°C). Stay hydrated and seek shade when possible.",
+  },
   "very-hot": {
     label: "Very Hot",
     component: WeatherIconVeryHot,
+    description:
+      "Extremely hot temperatures above 95°F (35°C). Take precautions and limit outdoor exposure.",
   },
 } as const;
