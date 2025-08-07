@@ -28,7 +28,7 @@ export const Header = ({
           <LogoLabel />
         </Logo>
       </div>
-      <div className="flex grow">
+      <div className="flex grow justify-end items-center">
         {user ? (
           <>
             <span className="welcome">

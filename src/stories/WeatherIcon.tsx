@@ -75,7 +75,7 @@ export const WeatherIcon = ({
     { "border-black": !featured },
     { "border-blue-500": featured },
     { "-rotate-45": featured },
-    "relative scale-75",
+    "relative scale-[.65]",
 
     "before:content-[''] before:absolute before:top-0 before:bottom-0 before:left-1/2 before:-translate-x-1/2",
     "before:w-[2px]",

@@ -47,13 +47,11 @@ const weatherDetails = {
 
 export default function WeatherLegend({ children }: PropsWithChildren<{}>) {
   return (
-    <div className="p-8 bg-white">
-      <h2 className="text-2xl font-bold text-center mb-8 text-gray-800">
-        Weather Icon Legend
-      </h2>
+    <div className="bg-white">
+      {/* <h2 className=" font-bold   mb-8 text-gray-800">Weather Icon Legend</h2> */}
 
       <TooltipProvider>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-0 max-w-6xl mx-auto">
+        <div className="border px-2 pt-2 rounded-lg grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-0 max-w-6xl mx-auto">
           {Object.entries(weatherIconMap2).map(
             ([key, { label, component: IconComponent }]) => {
               const details =
@@ -62,12 +60,12 @@ export default function WeatherLegend({ children }: PropsWithChildren<{}>) {
               return (
                 <Tooltip key={key}>
                   <TooltipTrigger asChild>
-                    <div className="flex flex-col items-center space-y-3 cursor-pointer hover:bg-accent _hover:scale-105 transition-transform duration-200">
-                      <div className="flex flex-col items-center justify-center w-12 h-12 bg-gray-50 rounded-lg border-none border-gray-200   transition-all duration-200">
+                    <div className="flex flex-col items-center  cursor-pointer hover:bg-accent _hover:scale-105 transition-transform duration-200">
+                      <div className="flex flex-col items-center justify-center w-12 h-8 bg-gray-50 rounded-lg border-none border-gray-200   transition-all duration-200">
                         <IconComponent />
                         {/* <IconComponent dot /> */}
                       </div>
-                      <span className="text-xs font-medium text-gray-700 text-center break-words whitespace-break-spaces">
+                      <span className="text-[11px] font-medium text-gray-700 text-center break-words whitespace-break-spaces py-1">
                         {label}
                       </span>
                     </div>

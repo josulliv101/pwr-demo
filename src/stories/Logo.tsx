@@ -14,6 +14,7 @@ export default function Logo({
 }: PropsWithChildren<ComponentProps<typeof Button>>) {
   return (
     <Button
+      variant={"ghost"}
       className={`gap-4  border h-16 min-w-0 p-0 px-0 py-0 ps-0 pe-0 scale-50 origin-left ${
         className ?? ""
       }`}
@@ -36,5 +37,5 @@ export default function Logo({
 }
 
 export const LogoLabel = () => (
-  <p className="text-blue-500 text-3xl font-semibold">Compare City Weather</p>
+  <p className="text-gray-500 text-3xl font-semibold">Compare City Weather</p>
 );
