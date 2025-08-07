@@ -1,49 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import clsx from "clsx";
-
-// type Prettify<T> = {
-//   [K in keyof T]: T[K];
-// } & {};
-
-// export const weatherIconMap = {
-//   cold: { filled: true },
-//   brisk: { filled: true },
-//   cool: { filled: true, featured: true },
-//   "mild-clouds": { featured: true },
-//   "mild-sun": { featured: true },
-//   "warm-clouds": { featured: true },
-//   "warm-sun": { featured: true },
-//   hot: {},
-//   "very-hot": {},
-// } as const;
-
-// type WeatherIconMap = typeof weatherIconMap;
-
-// Step 1: Union of all values
-// type WeatherIconPropsUnion = WeatherIconMap[keyof WeatherIconMap];
-
-// Step 2: Merge into a single type
-// type MergedWeatherIconProps = {
-//   [K in keyof WeatherIconPropsUnion]: WeatherIconPropsUnion[K];
-// };
-
-// export type WeatherIconMap = typeof weatherIconMap;
-
-// export type WeatherIconName = keyof WeatherIconMap;
-
-// export type WeatherIcon = Prettify<
-//   {
-//     [K in keyof WeatherIconMap]: {
-//       readonly type: K;
-//     } & WeatherIconMap[K];
-//   }[keyof WeatherIconMap]
-// >;
-
-// export type UnionToObject<T extends string | number | symbol> = {
-//   [K in T]: K;
-// };
-
-// export type WeatherIconTypes = UnionToObject<WeatherIcons>;
+import React from "react";
 
 export type WeatherIconProps = Partial<{
   dot: boolean;
@@ -63,39 +20,42 @@ export const WeatherIcon = ({
   className,
   classNameDot,
   children,
-}: WeatherIconProps) => {
+}: WeatherIconProps = {}) => {
   const classNames = clsx(
-    { "w-6 h-6": !featured },
-    { "w-5.5 h-5.5": featured },
+    // size
+    !featured ? "w-6 h-6" : "w-[22px] h-[22px]",
     "aspect-square",
     "overflow-visible",
-    { "rounded-sm": featured },
-    { "rounded-full": !featured },
-    { "border-2": !filled },
-    { "border-black": !featured },
-    { "border-blue-500": featured },
-    { "-rotate-45": featured },
+    // shape
+    featured ? "rounded-sm" : "rounded-full",
+    // border
+    !filled && "border-2",
+    !featured ? "border-black" : "border-blue-500",
+    // rotation for featured
+    featured && "-rotate-45",
+    // positioning and divider helper
     "relative scale-[.65]",
-
-    "before:content-[''] before:absolute before:top-0 before:bottom-0 before:left-1/2 before:-translate-x-1/2",
-    "before:w-[2px]",
-    { "before:bg-black": !filled && divider },
-    { "before:bg-white": filled && divider },
+    "before:content-[''] before:absolute before:top-0 before:bottom-0 before:left-1/2 before:-translate-x-1/2 before:w-[2px]",
+    divider && (filled ? "before:bg-white" : "before:bg-black"),
     className
   );
+
   return (
     <Badge variant={filled ? "default" : "outline"} className={classNames}>
       {dot && (
         <div
-          className={`absolute top-1/2 left-1/2 -translate-1/2 w-2 h-2 bg-yellow-400 rounded-full border-1 ${
-            !filled ? "border-black" : "border-black"
-          } ${classNameDot}`}
+          className={clsx(
+            "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-yellow-400 rounded-full border",
+            "border-black",
+            classNameDot
+          )}
         />
       )}
       <div
-        className={`absolute top-1/2 left-1/2 -translate-1/2 flex items-center justify-center ${
-          featured ? "rotate-45" : ""
-        }`}
+        className={clsx(
+          "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center",
+          featured && "rotate-45"
+        )}
       >
         {children}
       </div>
@@ -103,41 +63,51 @@ export const WeatherIcon = ({
   );
 };
 
-export const WeatherIconCold = (props: WeatherIconProps) => (
-  <WeatherIcon {...props} filled classNameDot="border-white border-1" />
+// Variants (kept your intent and styling, with class fixes)
+export const WeatherIconCold = (props: WeatherIconProps = {}) => (
+  <WeatherIcon {...props} filled classNameDot="border-white border" />
 );
-export const WeatherIconBrisk = (props: WeatherIconProps) => (
-  <WeatherIcon {...props} filled divider classNameDot="border-white border-1" />
+
+export const WeatherIconBrisk = (props: WeatherIconProps = {}) => (
+  <WeatherIcon {...props} filled divider classNameDot="border-white border" />
 );
-export const WeatherIconCool = (props: WeatherIconProps) => (
+
+export const WeatherIconCool = (props: WeatherIconProps = {}) => (
   <WeatherIcon
     {...props}
     featured
-    className="-rotate-45 border-blue-500 bg-gradient-to-br from-blue-500 from-50% to-white to-50%"
-    classNameDot="border-blue-500"
+    className={clsx(
+      "-rotate-45 border-blue-500 bg-gradient-to-br from-blue-500 from-50% to-white to-50%",
+      props.className
+    )}
+    classNameDot={clsx("border-blue-500", props.classNameDot)}
   />
 );
-export const WeatherIconMild = (props: WeatherIconProps) => (
+
+export const WeatherIconMild = (props: WeatherIconProps = {}) => (
   <WeatherIcon
     {...props}
     filled
     featured
-    className="bg-blue-500"
-    classNameDot="border-white border-1"
+    className={clsx("bg-blue-500", props.className)}
+    classNameDot={clsx("border-white border", props.classNameDot)}
   />
 );
-export const WeatherIconWarm = (props: WeatherIconProps) => (
+
+export const WeatherIconWarm = (props: WeatherIconProps = {}) => (
   <WeatherIcon
     {...props}
     featured
-    className="border-blue-500"
-    classNameDot="border-blue-500"
+    className={clsx("border-blue-500", props.className)}
+    classNameDot={clsx("border-blue-500", props.classNameDot)}
   />
 );
-export const WeatherIconHot = (props: WeatherIconProps) => (
+
+export const WeatherIconHot = (props: WeatherIconProps = {}) => (
   <WeatherIcon {...props} divider />
 );
-export const WeatherIconVeryHot = (props: WeatherIconProps) => (
+
+export const WeatherIconVeryHot = (props: WeatherIconProps = {}) => (
   <WeatherIcon {...props} />
 );
 
@@ -185,3 +155,5 @@ export const weatherIconMap2 = {
       "Extremely hot temperatures above 95°F (35°C). Take precautions and limit outdoor exposure.",
   },
 } as const;
+
+export type WeatherKey = keyof typeof weatherIconMap2;
