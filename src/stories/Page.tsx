@@ -22,7 +22,7 @@ export const Page: React.FC = () => {
         onCreateAccount={() => setUser({ name: "Jane Doe" })}
       />
 
-      <section className="grid grid-cols-12 gap-4 h-[calc(100dvh-64px)]">
+      <section className="grid grid-cols-12 gap-4 h-[calc(100dvh-64px)] mt-4">
         <div className="col-span-4">
           <div className="flex items-center gap-5 -mt-0 mb-6 px-4 py-3 bg-accent rounded-lg">
             <Info className="text-gray-400 w-6 h-6" aria-label="Info" />
