@@ -5,6 +5,7 @@ import "./page.css";
 import WeatherLegend from "./WeatherIconLegend";
 import { Info } from "lucide-react";
 import MapboxExample from "./MapExample";
+import FilterByMonth from "./FilterByMonth";
 
 type User = {
   name: string;
@@ -22,7 +23,7 @@ export const Page: React.FC = () => {
         onCreateAccount={() => setUser({ name: "Jane Doe" })}
       />
 
-      <section className="grid grid-cols-12 gap-4 h-[calc(100dvh-64px)] mt-4">
+      <section className="grid grid-cols-12 gap-4 h-[calc(100dvh-64px-16px-84px)] mt-4">
         <div className="col-span-4">
           <div className="flex items-center gap-5 -mt-0 mb-6 px-4 py-3 bg-accent rounded-lg">
             <Info className="text-gray-400 w-6 h-6" aria-label="Info" />
@@ -35,8 +36,18 @@ export const Page: React.FC = () => {
         </div>
         <div className="col-span-8 h-full">
           <MapboxExample />
+          <FilterByMonth initialActiveMonth={getCurrentMonthHalfIndex()} />
         </div>
       </section>
     </article>
   );
 };
+
+function getCurrentMonthHalfIndex(): number {
+  const today = new Date();
+  const month = today.getMonth(); // 0 = Jan, 11 = Dec
+  const date = today.getDate();
+  const isSecondHalf = date > 15; // 1–15 = first half, 16+ = second half
+
+  return month * 2 + (isSecondHalf ? 1 : 0);
+}

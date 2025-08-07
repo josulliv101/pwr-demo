@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface DualButtonProps {
   label?: string;
+  activeButton?: "left" | "right";
   onLeftClick?: () => void;
   onRightClick?: () => void;
   className?: string;
@@ -10,26 +10,29 @@ interface DualButtonProps {
 
 export default function DualButton({
   label = "Button",
+  activeButton,
   onLeftClick,
   onRightClick,
   className,
 }: DualButtonProps) {
-  const [activeButton, setActiveButton] = useState<"left" | "right">("left");
+  // const [activeButton, setActiveButton] = useState<"left" | "right" | null>(
+  //   null
+  // );
 
   const handleLeftClick = () => {
-    setActiveButton("left");
+    // setActiveButton("left");
     onLeftClick?.();
   };
 
   const handleRightClick = () => {
-    setActiveButton("right");
+    // setActiveButton("right");
     onRightClick?.();
   };
 
   return (
     <div
       className={cn(
-        "relative inline-flex rounded-lg border border-input bg-background shadow-sm",
+        "relative w-30 min-w-30 inline-flex rounded-lg border border-input bg-background shadow-sm",
         className
       )}
     >
@@ -37,7 +40,7 @@ export default function DualButton({
       <button
         onClick={handleLeftClick}
         className={cn(
-          "relative px-4 py-2 text-sm font-medium transition-colors rounded-l-lg border-r border-input flex-1",
+          "relative min-w-0 px-0 py-2 text-sm font-medium transition-colors rounded-l-lg border-r border-input flex-1",
           "hover:bg-accent hover:text-accent-foreground",
           "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
           activeButton === "left"
@@ -55,7 +58,7 @@ export default function DualButton({
       <button
         onClick={handleRightClick}
         className={cn(
-          "relative px-4 py-2 text-sm font-medium transition-colors rounded-r-lg flex-1",
+          "relative min-w-0 px-0 py-2 text-sm font-medium transition-colors rounded-r-lg flex-1",
           "hover:bg-accent hover:text-accent-foreground",
           "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
           activeButton === "right"
