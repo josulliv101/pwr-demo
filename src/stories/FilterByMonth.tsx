@@ -35,7 +35,7 @@ export default function FilterByMonth({
 }
 
 function getFullMonthNames(): string[] {
-  const formatter = new Intl.DateTimeFormat("en-US", { month: "long" });
+  const formatter = new Intl.DateTimeFormat("en-US", { month: "short" });
   return Array.from({ length: 12 }, (_, i) =>
     formatter.format(new Date(2000, i, 1))
   );

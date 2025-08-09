@@ -32,7 +32,7 @@ export default function DualButton({
   return (
     <div
       className={cn(
-        "relative w-30 min-w-30 inline-flex rounded-lg border border-input bg-background shadow-sm",
+        "relative w-full min-w-0 inline-flex rounded-lg border border-input bg-background shadow-sm",
         className
       )}
     >
@@ -40,7 +40,7 @@ export default function DualButton({
       <button
         onClick={handleLeftClick}
         className={cn(
-          "relative min-w-0 px-0 py-2 text-sm font-medium transition-colors rounded-l-lg border-r border-input flex-1",
+          "relative min-w-0 px-0 py-2 text-sm font-medium transition-colors rounded-l-lg border-r_ border-input flex-1",
           "hover:bg-accent hover:text-accent-foreground",
           "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
           activeButton === "left"
