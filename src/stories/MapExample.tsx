@@ -23,7 +23,7 @@ const MapboxExample = () => {
     <div
       style={{ height: "100%" }}
       ref={mapContainerRef}
-      className="map-container"
+      className="map-container rounded-lg"
     />
   );
 };
