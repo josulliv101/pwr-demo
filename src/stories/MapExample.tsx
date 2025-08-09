@@ -42,26 +42,107 @@ const MapboxExample = () => {
       container: mapContainerRef.current,
       center: [-74.5, 40], // starting position [lng, lat]
       zoom: 2, // starting zoom
+      config: {
+        // Initial configuration for the Mapbox Standard style set above. By default, its ID is `basemap`.
+        basemap: {
+          // Here, we're disabling all of the 3D layers such as landmarks, trees, and 3D extrusions.
+          showPlaceLabels: true, // false,
+          showRoadLabels: false,
+          showPointOfInterestLabels: false,
+          showTransitLabels: false,
+          theme: "monochrome",
+        },
+      },
     });
 
     mapRef.current.on("style.load", () => {});
 
     mapRef.current.on("load", () => {
+      // First, load all icons as Mapbox images
+
+      const iconNames = [
+        "cold",
+        "brisk",
+        "cool",
+        "mild",
+        "warm",
+        "hot",
+        "veryhot",
+      ];
+
+      mapRef.current?.addSource("points", {
+        type: "geojson",
+        data: geoJsonData,
+        generateId: true,
+        cluster: false,
+      });
+
+      Promise.all(
+        iconNames.map(
+          (name) =>
+            new Promise<void>((resolve, reject) => {
+              mapRef.current?.loadImage(
+                `/icons/${name}.webp`,
+                (error, image) => {
+                  if (error || !image) return reject(error);
+                  if (!mapRef.current?.hasImage(name)) {
+                    mapRef.current?.addImage(name, image);
+                  }
+                  resolve();
+                }
+              );
+            })
+        )
+      )
+        .then(() => {
+          iconNames.forEach((name) => {
+            // ICON LAYER (always shows)
+            mapRef.current?.addLayer({
+              id: `${name}-icon`,
+              type: "symbol",
+              source: "points",
+              filter: ["==", ["get", "type"], name],
+              layout: {
+                "icon-image": name,
+                "icon-size": 1,
+                "icon-anchor": "bottom",
+                "icon-allow-overlap": true, // icons never hide
+              },
+            });
+
+            // LABEL LAYER (collision detection ON)
+            mapRef.current?.addLayer({
+              id: `${name}-label`,
+              type: "symbol",
+              source: "points",
+              filter: ["==", ["get", "type"], name],
+              layout: {
+                "text-field": ["get", "name"],
+                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                "text-size": 12,
+                "text-offset": [0, 0.6],
+                "text-anchor": "top",
+                "text-allow-overlap": false, // hide if overlaps
+                "text-ignore-placement": false, // respect collisions with icons & text
+              },
+              paint: {
+                "text-color": "#000",
+                "text-halo-color": "#fff",
+                "text-halo-width": 1,
+              },
+            });
+          });
+        })
+        .catch((err) => {
+          console.error("Error loading images:", err);
+        });
+
       mapRef.current?.loadImage(
         "https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png",
         (error, image) => {
           if (error || !image) throw error;
 
           mapRef.current?.addImage("custom-marker", image);
-
-          mapRef.current?.addSource("points", {
-            type: "geojson",
-            data: geoJsonData,
-            generateId: true,
-            cluster: false,
-            clusterMaxZoom: 14, // Max zoom to cluster points on
-            clusterRadius: 50, // Radius of each cluster when clustering points (defaults to
-          });
 
           mapRef.current?.addLayer({
             id: "clusters",
@@ -130,138 +211,138 @@ const MapboxExample = () => {
           //   });
 
           // Cold - solid circle
-          mapRef.current?.addLayer({
-            id: "cold",
-            type: "circle",
-            source: "points",
-            filter: ["==", ["get", "type"], "cold"],
-            paint: {
-              "circle-radius": 8,
-              "circle-color": "#000",
-            },
-          });
+          //   mapRef.current?.addLayer({
+          //     id: "cold",
+          //     type: "circle",
+          //     source: "points",
+          //     filter: ["==", ["get", "type"], "cold"],
+          //     paint: {
+          //       "circle-radius": 8,
+          //       "circle-color": "#000",
+          //     },
+          //   });
 
-          // Brisk - solid circle + white vertical line
-          mapRef.current?.addLayer({
-            id: "brisk-circle",
-            type: "circle",
-            source: "points",
-            filter: ["==", ["get", "type"], "brisk"],
-            paint: {
-              "circle-radius": 8,
-              "circle-color": "#000",
-            },
-          });
-          mapRef.current?.addLayer({
-            id: "brisk-line",
-            type: "symbol",
-            source: "points",
-            filter: ["==", ["get", "type"], "brisk"],
-            layout: {
-              "text-field": "|",
-              "text-font": ["Arial Unicode MS Regular"],
-              "text-size": 24,
-            },
-            paint: {
-              "text-color": "#fff",
-            },
-          });
+          //   // Brisk - solid circle + white vertical line
+          //   mapRef.current?.addLayer({
+          //     id: "brisk-circle",
+          //     type: "circle",
+          //     source: "points",
+          //     filter: ["==", ["get", "type"], "brisk"],
+          //     paint: {
+          //       "circle-radius": 8,
+          //       "circle-color": "#000",
+          //     },
+          //   });
+          //   mapRef.current?.addLayer({
+          //     id: "brisk-line",
+          //     type: "symbol",
+          //     source: "points",
+          //     filter: ["==", ["get", "type"], "brisk"],
+          //     layout: {
+          //       "text-field": "|",
+          //       "text-font": ["Arial Unicode MS Regular"],
+          //       "text-size": 24,
+          //     },
+          //     paint: {
+          //       "text-color": "#fff",
+          //     },
+          //   });
 
-          // Cool - diamond with stroke, half filled
-          mapRef.current?.addLayer({
-            id: "cool-diamond-fill",
-            type: "symbol",
-            source: "points",
-            filter: ["==", ["get", "type"], "cool"],
-            layout: {
-              "text-field": "◆",
-              "text-font": ["Arial Unicode MS Regular"],
-              "text-size": 24,
-            },
-            paint: { "text-color": "#007BFF" },
-          });
-          mapRef.current?.addLayer({
-            id: "cool-diamond-outline",
-            type: "symbol",
-            source: "points",
-            filter: ["==", ["get", "type"], "cool"],
-            layout: {
-              "text-field": "◇",
-              "text-font": ["Arial Unicode MS Regular"],
-              "text-size": 24,
-            },
-            paint: { "text-color": "#000" },
-          });
+          //   // Cool - diamond with stroke, half filled
+          //   mapRef.current?.addLayer({
+          //     id: "cool-diamond-fill",
+          //     type: "symbol",
+          //     source: "points",
+          //     filter: ["==", ["get", "type"], "cool"],
+          //     layout: {
+          //       "text-field": "◆",
+          //       "text-font": ["Arial Unicode MS Regular"],
+          //       "text-size": 24,
+          //     },
+          //     paint: { "text-color": "#007BFF" },
+          //   });
+          //   mapRef.current?.addLayer({
+          //     id: "cool-diamond-outline",
+          //     type: "symbol",
+          //     source: "points",
+          //     filter: ["==", ["get", "type"], "cool"],
+          //     layout: {
+          //       "text-field": "◇",
+          //       "text-font": ["Arial Unicode MS Regular"],
+          //       "text-size": 24,
+          //     },
+          //     paint: { "text-color": "#000" },
+          //   });
 
-          // Mild - solid diamond
-          mapRef.current?.addLayer({
-            id: "mild",
-            type: "symbol",
-            source: "points",
-            filter: ["==", ["get", "type"], "mild"],
-            layout: {
-              "text-field": "◆",
-              "text-font": ["Arial Unicode MS Regular"],
-              "text-size": 24,
-            },
-            paint: { "text-color": "#007BFF" },
-          });
+          //   // Mild - solid diamond
+          //   mapRef.current?.addLayer({
+          //     id: "mild",
+          //     type: "symbol",
+          //     source: "points",
+          //     filter: ["==", ["get", "type"], "mild"],
+          //     layout: {
+          //       "text-field": "◆",
+          //       "text-font": ["Arial Unicode MS Regular"],
+          //       "text-size": 24,
+          //     },
+          //     paint: { "text-color": "#007BFF" },
+          //   });
 
-          // Warm - diamond outline only
-          mapRef.current?.addLayer({
-            id: "warm",
-            type: "symbol",
-            source: "points",
-            filter: ["==", ["get", "type"], "warm"],
-            layout: {
-              "text-field": "◇",
-              "text-font": ["Arial Unicode MS Regular"],
-              "text-size": 24,
-            },
-            paint: { "text-color": "#007BFF" },
-          });
+          //   // Warm - diamond outline only
+          //   mapRef.current?.addLayer({
+          //     id: "warm",
+          //     type: "symbol",
+          //     source: "points",
+          //     filter: ["==", ["get", "type"], "warm"],
+          //     layout: {
+          //       "text-field": "◇",
+          //       "text-font": ["Arial Unicode MS Regular"],
+          //       "text-size": 24,
+          //     },
+          //     paint: { "text-color": "#007BFF" },
+          //   });
 
-          // Hot - outline circle with vertical line
-          mapRef.current?.addLayer({
-            id: "hot-circle",
-            type: "circle",
-            source: "points",
-            filter: ["==", ["get", "type"], "hot"],
-            paint: {
-              "circle-radius": 8,
-              "circle-color": "transparent",
-              "circle-stroke-color": "#000",
-              "circle-stroke-width": 2,
-            },
-          });
-          mapRef.current?.addLayer({
-            id: "hot-line",
-            type: "symbol",
-            source: "points",
-            filter: ["==", ["get", "type"], "hot"],
-            layout: {
-              "text-field": "|",
-              "text-font": ["Arial Unicode MS Regular"],
-              "text-size": 24,
-            },
-            paint: {
-              "text-color": "#000",
-            },
-          });
+          //   // Hot - outline circle with vertical line
+          //   mapRef.current?.addLayer({
+          //     id: "hot-circle",
+          //     type: "circle",
+          //     source: "points",
+          //     filter: ["==", ["get", "type"], "hot"],
+          //     paint: {
+          //       "circle-radius": 8,
+          //       "circle-color": "transparent",
+          //       "circle-stroke-color": "#000",
+          //       "circle-stroke-width": 2,
+          //     },
+          //   });
+          //   mapRef.current?.addLayer({
+          //     id: "hot-line",
+          //     type: "symbol",
+          //     source: "points",
+          //     filter: ["==", ["get", "type"], "hot"],
+          //     layout: {
+          //       "text-field": "|",
+          //       "text-font": ["Arial Unicode MS Regular"],
+          //       "text-size": 24,
+          //     },
+          //     paint: {
+          //       "text-color": "#000",
+          //     },
+          //   });
 
-          // Very Hot - circle outline only
-          mapRef.current?.addLayer({
-            id: "veryhot",
-            type: "circle",
-            source: "points",
-            filter: ["==", ["get", "type"], "veryhot"],
-            paint: {
-              "circle-radius": 8,
-              "circle-color": "transparent",
-              "circle-stroke-color": "#000",
-              "circle-stroke-width": 2,
-            },
-          });
+          //   // Very Hot - circle outline only
+          //   mapRef.current?.addLayer({
+          //     id: "veryhot",
+          //     type: "circle",
+          //     source: "points",
+          //     filter: ["==", ["get", "type"], "veryhot"],
+          //     paint: {
+          //       "circle-radius": 8,
+          //       "circle-color": "transparent",
+          //       "circle-stroke-color": "#000",
+          //       "circle-stroke-width": 2,
+          //     },
+          //   });
         }
       );
     });

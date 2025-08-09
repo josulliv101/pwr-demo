@@ -51,7 +51,7 @@ export default function WeatherLegend({ children }: PropsWithChildren<{}>) {
       {/* <h2 className=" font-bold   mb-8 text-gray-800">Weather Icon Legend</h2> */}
 
       <TooltipProvider>
-        <div className="border px-2 rounded-lg grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-0 max-w-6xl mx-auto">
+        <div className="shadow-sm border px-2 rounded-lg grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-0 max-w-6xl mx-auto">
           {Object.entries(weatherIconMap2).map(
             ([key, { label, component: IconComponent }]) => {
               const details =
