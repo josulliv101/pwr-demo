@@ -157,3 +157,39 @@ export const weatherIconMap2 = {
 } as const;
 
 export type WeatherKey = keyof typeof weatherIconMap2;
+
+// Extract icon names
+export const weatherIconNames = Object.keys(
+  weatherIconMap2
+) as (keyof typeof weatherIconMap2)[];
+
+// Function to get a random icon name
+export function getRandomWeatherIconName(): keyof typeof weatherIconMap2 {
+  const randomIndex = Math.floor(Math.random() * weatherIconNames.length);
+  return weatherIconNames[randomIndex];
+}
+
+export function getIconNameByDigit(
+  digit: number
+): keyof typeof weatherIconMap2 | undefined {
+  switch (digit) {
+    case 1:
+      return "cold";
+    case 2:
+      return "brisk";
+    case 3:
+      return "cool";
+    case 4:
+    case 5:
+      return "mild";
+    case 6:
+    case 7:
+      return "warm";
+    case 8:
+      return "hot";
+    case 9:
+      return "very-hot";
+    default:
+      return undefined; // Or throw an error if preferred
+  }
+}
