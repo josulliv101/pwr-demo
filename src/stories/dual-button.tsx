@@ -32,7 +32,7 @@ export default function DualButton({
   return (
     <div
       className={cn(
-        "relative w-full min-w-0 inline-flex rounded-lg border border-input bg-background shadow-sm",
+        "relative w-full min-w-0 inline-flex rounded-lg border border-input bg-background shadow-sm__",
         className
       )}
     >

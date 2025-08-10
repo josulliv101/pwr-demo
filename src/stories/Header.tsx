@@ -43,7 +43,7 @@ export const Header = ({
               primary
               size="small"
               onClick={onCreateAccount}
-              label="Sign up"
+              label="Take a Guided Tour"
             />
           </>
         )}
