@@ -24,8 +24,8 @@ const DEFAULT_YEAR: MonthPair[] = [
   { start: "cool", end: "mild" }, // Apr
   { start: "mild", end: "warm" }, // May
   { start: "warm", end: "hot" }, // Jun
-  { start: "hot", end: "very-hot" }, // Jul
-  { start: "very-hot", end: "hot" }, // Aug
+  { start: "hot", end: "veryhot" }, // Jul
+  { start: "veryhot", end: "hot" }, // Aug
   { start: "warm", end: "mild" }, // Sep
   { start: "mild", end: "cool" }, // Oct
   { start: "cool", end: "brisk" }, // Nov

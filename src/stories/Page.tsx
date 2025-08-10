@@ -31,7 +31,7 @@ export const Page: React.FC = () => {
             <WeatherLegend />
             <FilterByMonth
               className="mt-4"
-              initialActiveMonth={getCurrentMonthHalfIndex()}
+              // initialActiveMonth={getCurrentMonthHalfIndex()}
             />
             <div className="flex items-center gap-5 mt-4 px-4 py-3 bg-accent rounded-lg">
               <Info className="text-gray-400 w-6 h-6" aria-label="Info" />
@@ -60,7 +60,7 @@ export const Page: React.FC = () => {
   );
 };
 
-function getCurrentMonthHalfIndex(): number {
+export function getCurrentMonthHalfIndex(): number {
   const today = new Date();
   const month = today.getMonth(); // 0 = Jan, 11 = Dec
   const date = today.getDate();

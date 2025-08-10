@@ -1,18 +1,17 @@
 import DualButton from "./dual-button";
-import { useState } from "react";
+
+import { useSelectedPeriod } from "./SelectedPeriodContext";
 
 interface FilterByMonthProps {
   className?: string;
-  initialActiveMonth?: number | null;
 }
 
-export default function FilterByMonth({
-  className = "",
-  initialActiveMonth = null,
-}: FilterByMonthProps) {
-  const [activeMonth, setActiveMonth] = useState<number | null>(
-    initialActiveMonth
-  );
+export default function FilterByMonth({ className = "" }: FilterByMonthProps) {
+  //   const [activeMonth, setActiveMonth] = useState<number | null>(
+  //     initialActiveMonth
+  //   );
+  const { selectedPeriod: activeMonth, setSelectedPeriod: setActiveMonth } =
+    useSelectedPeriod();
   return (
     <div className={`grid grid-cols-6 gap-2 ${className}`}>
       {getFullMonthNames().map((month, index) => (

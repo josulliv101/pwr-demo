@@ -148,7 +148,7 @@ export const weatherIconMap2 = {
     description:
       "Hot weather around 85-95°F (29-35°C). Stay hydrated and seek shade when possible.",
   },
-  "very-hot": {
+  veryhot: {
     label: "Very Hot",
     component: WeatherIconVeryHot,
     description:
@@ -188,7 +188,7 @@ export function getIconNameByDigit(
     case 8:
       return "hot";
     case 9:
-      return "very-hot";
+      return "veryhot";
     default:
       return undefined; // Or throw an error if preferred
   }

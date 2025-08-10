@@ -38,7 +38,7 @@ const weatherDetails = {
     characteristics: "High temperatures, stay hydrated",
     clothing: "Minimal, light-colored, breathable clothing",
   },
-  "very-hot": {
+  veryhot: {
     description: "Very hot temperatures, above 95°F (35°C)",
     characteristics: "Extreme heat, potential health risks",
     clothing: "Sun protection essential, seek shade frequently",

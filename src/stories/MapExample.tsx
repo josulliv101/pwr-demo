@@ -1,11 +1,33 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 
 import "mapbox-gl/dist/mapbox-gl.css";
 import data from "@/data/cities.json";
 import { getIconNameByDigit } from "./WeatherIcon";
+import { useSelectedPeriod } from "./SelectedPeriodContext";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
+
+const createGeoJsonData = (period: number) => ({
+  type: "FeatureCollection" as const,
+  features: data.map((location: any) => ({
+    type: "Feature" as const,
+    properties: {
+      id: location.id,
+      name: location.name,
+      title: location.name,
+      rating: location.rating,
+      type: getIconNameByDigit(location.weatherRatings?.[period] || 1),
+    },
+    geometry: {
+      type: "Point" as const,
+      coordinates:
+        typeof location.latLng === "string"
+          ? location.latLng.split(",").map(Number).reverse()
+          : location.latLng?.reverse(),
+    },
+  })),
+});
 
 const geoJsonData: GeoJSON.FeatureCollection<GeoJSON.Geometry> = {
   type: "FeatureCollection",
@@ -34,6 +56,23 @@ console.log("geoJsonData", geoJsonData);
 const MapboxExample = () => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
+
+  // const [selectedPeriod, setSelectedPeriod] = useState<number>(0); // 0–23
+  const { selectedPeriod } = useSelectedPeriod();
+
+  // Keep a ref to the current data so we can update without recreating map
+  const geoJsonRef = useRef(createGeoJsonData(selectedPeriod));
+
+  // Function to update the icons when period changes
+  const updateMapData = useCallback((period: number) => {
+    geoJsonRef.current = createGeoJsonData(period);
+    const source = mapRef.current?.getSource(
+      "points"
+    ) as mapboxgl.GeoJSONSource;
+    if (source) {
+      source.setData(geoJsonRef.current);
+    }
+  }, []);
 
   useEffect(() => {
     if (!mapContainerRef.current) return;
@@ -72,7 +111,7 @@ const MapboxExample = () => {
 
       mapRef.current?.addSource("points", {
         type: "geojson",
-        data: geoJsonData,
+        data: geoJsonRef.current,
         generateId: true,
         cluster: false,
       });
@@ -109,8 +148,6 @@ const MapboxExample = () => {
                 "icon-allow-overlap": true, // icons never hide
               },
             });
-
-            // LABEL LAYER (collision detection ON)
             mapRef.current?.addLayer({
               id: `${name}-label`,
               type: "symbol",
@@ -119,11 +156,13 @@ const MapboxExample = () => {
               layout: {
                 "text-field": ["get", "name"],
                 "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-                "text-size": 12,
+                "text-size": 10,
                 "text-offset": [0, 0.6],
                 "text-anchor": "top",
-                "text-allow-overlap": false, // hide if overlaps
-                "text-ignore-placement": false, // respect collisions with icons & text
+                "text-allow-overlap": false, // still hides on overlap
+                "text-ignore-placement": false, // but only considers other text
+                "text-padding": 1, // smaller collision box
+                "symbol-sort-key": ["-", ["get", "rating"]], // higher rating = higher priority
               },
               paint: {
                 "text-color": "#000",
@@ -351,12 +390,20 @@ const MapboxExample = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (mapRef.current) {
+      updateMapData(selectedPeriod);
+    }
+  }, [selectedPeriod, updateMapData]);
+
   return (
-    <div
-      style={{ height: "100%" }}
-      ref={mapContainerRef}
-      className="map-container rounded-lg"
-    />
+    <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+      <div
+        ref={mapContainerRef}
+        style={{ flex: 1 }}
+        className="map-container rounded-lg"
+      />
+    </div>
   );
 };
 
