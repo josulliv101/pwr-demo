@@ -7,8 +7,7 @@ import { getIconNameByDigit } from "./WeatherIcon";
 import { useSelectedPeriod } from "./SelectedPeriodContext";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
-
-const createGeoJsonData = (period: number) => ({
+const createGeoJsonData = (period: number, showSunnyDays: boolean) => ({
   type: "FeatureCollection" as const,
   features: data.map((location: any) => ({
     type: "Feature" as const,
@@ -18,6 +17,10 @@ const createGeoJsonData = (period: number) => ({
       title: location.name,
       rating: location.rating,
       type: getIconNameByDigit(location.weatherRatings?.[period] || 1),
+      sunnyDot: showSunnyDays
+        ? location.weatherRatings?.[period] === 5 ||
+          location.weatherRatings?.[period] === 7
+        : false, // new
     },
     geometry: {
       type: "Point" as const,
@@ -29,50 +32,29 @@ const createGeoJsonData = (period: number) => ({
   })),
 });
 
-const geoJsonData: GeoJSON.FeatureCollection<GeoJSON.Geometry> = {
-  type: "FeatureCollection",
-  features: data.map((location: any) => ({
-    type: "Feature",
-    properties: {
-      id: location.id,
-      name: location.name,
-      title: location.name,
-      rating: location.rating,
-      type: getIconNameByDigit(location.weatherRatings?.[7] || 1), // Example static value, replace with actual logic if needed
-      // weatherPeriods: getLocationWeatherPeriods(
-      //   location.weatherPeriods
-      // ).map(convertWeatherPeriodValueToIcon),
-    },
-    geometry: {
-      type: "Point",
-      coordinates:
-        typeof location.latLng === "string"
-          ? location.latLng.split(",").map(Number).reverse()
-          : location.latLng?.reverse(),
-    },
-  })),
-};
-console.log("geoJsonData", geoJsonData);
 const MapboxExample = () => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
 
   // const [selectedPeriod, setSelectedPeriod] = useState<number>(0); // 0–23
-  const { selectedPeriod } = useSelectedPeriod();
+  const { selectedPeriod, showSunnyDays } = useSelectedPeriod();
 
   // Keep a ref to the current data so we can update without recreating map
-  const geoJsonRef = useRef(createGeoJsonData(selectedPeriod));
+  const geoJsonRef = useRef(createGeoJsonData(selectedPeriod, showSunnyDays));
 
   // Function to update the icons when period changes
-  const updateMapData = useCallback((period: number) => {
-    geoJsonRef.current = createGeoJsonData(period);
-    const source = mapRef.current?.getSource(
-      "points"
-    ) as mapboxgl.GeoJSONSource;
-    if (source) {
-      source.setData(geoJsonRef.current);
-    }
-  }, []);
+  const updateMapData = useCallback(
+    (period: number, showSunnyDays: boolean) => {
+      geoJsonRef.current = createGeoJsonData(period, showSunnyDays);
+      const source = mapRef.current?.getSource(
+        "points"
+      ) as mapboxgl.GeoJSONSource;
+      if (source) {
+        source.setData(geoJsonRef.current);
+      }
+    },
+    []
+  );
 
   useEffect(() => {
     if (!mapContainerRef.current) return;
@@ -390,11 +372,30 @@ const MapboxExample = () => {
     };
   }, []);
 
+  mapRef.current?.addLayer({
+    id: "sunny-dot",
+    type: "circle",
+    source: "points",
+    filter: ["==", ["get", "sunnyDot"], true],
+    paint: {
+      "circle-radius": 3,
+      "circle-color": "#ffdf20",
+      "circle-stroke-width": 1,
+      "circle-stroke-color": "#999",
+      "circle-emissive-strength": 1,
+      "circle-translate": [0, -20], // moves it up 10px if needed
+    },
+    layout: {
+      // Force to draw on top of icons
+      visibility: "visible",
+    },
+  });
+
   useEffect(() => {
     if (mapRef.current) {
-      updateMapData(selectedPeriod);
+      updateMapData(selectedPeriod, showSunnyDays);
     }
-  }, [selectedPeriod, updateMapData]);
+  }, [selectedPeriod, showSunnyDays, updateMapData]);
 
   return (
     <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>

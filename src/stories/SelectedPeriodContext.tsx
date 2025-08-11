@@ -5,6 +5,8 @@ import { getCurrentMonthHalfIndex } from "./Page";
 type SelectedPeriodContextType = {
   selectedPeriod: number;
   setSelectedPeriod: (value: number) => void;
+  showSunnyDays: boolean;
+  setShowSunnyDays: (value: boolean) => void;
 };
 
 const SelectedPeriodContext = createContext<
@@ -19,9 +21,16 @@ export const SelectedPeriodProvider = ({
   const [selectedPeriod, setSelectedPeriod] = useState<number>(
     getCurrentMonthHalfIndex()
   );
+  const [showSunnyDays, setShowSunnyDays] = useState<boolean>(false);
+
   return (
     <SelectedPeriodContext.Provider
-      value={{ selectedPeriod, setSelectedPeriod }}
+      value={{
+        selectedPeriod,
+        setSelectedPeriod,
+        showSunnyDays,
+        setShowSunnyDays,
+      }}
     >
       {children}
     </SelectedPeriodContext.Provider>
