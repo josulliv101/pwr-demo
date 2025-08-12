@@ -24,6 +24,7 @@ export const WeatherIcon = ({
   const classNames = clsx(
     // size
     !featured ? "w-6 h-6" : "w-[22px] h-[22px]",
+    "px-0",
     "aspect-square",
     "overflow-visible",
     // shape
