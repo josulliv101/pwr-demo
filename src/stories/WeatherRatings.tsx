@@ -58,8 +58,8 @@ export function YearlyWeatherIcons({
     ? "min-w-max flex items-end gap-2 py-1"
     : "min-w-max flex items-end gap-2 py-2";
   const monthColClass = compact
-    ? "flex flex-col items-center gap-1"
-    : "flex flex-col items-center gap-1";
+    ? "flex flex-col items-center gap-1 w-full"
+    : "flex flex-col items-center gap-1 w-full";
   const stackClass = compact
     ? "flex flex-col items-center gap-0 -space-y-1"
     : "flex flex-col items-center gap-0";
@@ -94,6 +94,7 @@ export function YearlyWeatherIcons({
               <div key={idx} role="listitem" className={monthColClass}>
                 <div className={stackClass}>
                   <div
+                    className="w-full"
                     role="img"
                     aria-label={`${monthLabel} start: ${
                       weatherIconMap2[pair.start].label
@@ -108,6 +109,7 @@ export function YearlyWeatherIcons({
                     />
                   </div>
                   <div
+                    className="w-full"
                     role="img"
                     aria-label={`${monthLabel} end: ${
                       weatherIconMap2[pair.end].label

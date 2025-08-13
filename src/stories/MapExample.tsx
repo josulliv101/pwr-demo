@@ -409,8 +409,10 @@ const MapboxExample = () => {
         // style={{ flex: 1 }}
         className="map-container rounded-b-lg h-[calc(100%-54px)] w-full"
       />
-      <div className="min-w-64 border-0 bg-blue-500 font-semibold text-accent text-3xl px-5 py-3 absolute bottom-6 right-2 rounded-sm">
-        <div className="text-xs opacity-75">Comfort Zones</div>
+      <div className="min-w-[310px] w-[310px] border-0 bg-blue-500 font-semibold text-accent text-3xl px-5 py-3 absolute top-16 right-2 rounded-sm">
+        <div className="text-xs opacity-75">
+          Displaying 600 Comfort Zones Worldwide
+        </div>
         {monthName}{" "}
         <span className="text-[16px] font-semibold">
           &nbsp; <sup className="relative top-[0px] text-lg">{halfLabel}</sup>

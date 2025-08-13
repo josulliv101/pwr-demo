@@ -28,7 +28,7 @@ export const Page: React.FC = () => {
           onCreateAccount={() => setUser({ name: "Jane Doe" })}
         />
 
-        <section className="grid grid-cols-12 gap-4 h-[calc(100dvh-16px-148px)] mt-4">
+        <section className="grid grid-cols-12 gap-8 h-[calc(100dvh-16px-148px)] mt-4">
           <div className="col-span-4 flex flex-col justify-between h-full">
             <div>
               <WeatherLegend showSunnyIcon={showSunnyDays}>
