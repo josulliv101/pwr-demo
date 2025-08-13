@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 import clsx from "clsx";
 import React from "react";
 
@@ -21,7 +22,7 @@ export const WeatherIcon = ({
   classNameDot,
   children,
 }: WeatherIconProps = {}) => {
-  const classNames = clsx(
+  const classNames = cn(
     // size
     !featured ? "w-6 h-6" : "w-[22px] h-[22px]",
     "px-0",

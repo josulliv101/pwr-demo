@@ -5,11 +5,11 @@ import "./page.css";
 import WeatherLegend from "./WeatherIconLegend";
 import { Info } from "lucide-react";
 import MapboxExample from "./MapExample";
-import FilterByMonth from "./FilterByMonth";
 // import { YearlyWeatherIcons } from "./WeatherRatings";
 import Footer from "./Footer";
 import { ShowSunnyDaysToggle } from "./ShowSunnyDaysToggle";
-// import { Separator } from "@/components/ui/separator";
+import { SidebarTabs } from "./SidebarTabs";
+import { useSelectedPeriod } from "./SelectedPeriodContext";
 
 type User = {
   name: string;
@@ -17,7 +17,7 @@ type User = {
 
 export const Page: React.FC = () => {
   const [user, setUser] = React.useState<User>();
-
+  const { showSunnyDays } = useSelectedPeriod();
   return (
     <>
       <article className="max-w-7xl mx-auto h-[calc(100dvh-65px-16px)] px-4">
@@ -31,14 +31,11 @@ export const Page: React.FC = () => {
         <section className="grid grid-cols-12 gap-4 h-[calc(100dvh-16px-148px)] mt-4">
           <div className="col-span-4 flex flex-col justify-between h-full">
             <div>
-              <WeatherLegend>
-                <ShowSunnyDaysToggle />
+              <WeatherLegend showSunnyIcon={showSunnyDays}>
+                <ShowSunnyDaysToggle className="col-span-7" />
               </WeatherLegend>
               {/* <Separator className="my-6" /> */}
-              <FilterByMonth
-                className="mt-4"
-                // initialActiveMonth={getCurrentMonthHalfIndex()}
-              />
+              <SidebarTabs />
             </div>
             <div className="flex items-center gap-5 mt-4 px-4 py-3 bg-accent rounded-lg">
               <Info className="text-gray-400 w-6 h-6" aria-label="Info" />

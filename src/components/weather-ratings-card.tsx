@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import {
   WeatherIconCool,
   WeatherIconHot,
@@ -18,16 +12,16 @@ export function WeatherRatingsCard() {
     <Card className="w-full max-w-6xl">
       <CardHeader>
         <CardTitle className="font-heading text-2xl">
-          San Francisco Weather
+          San Francisco, CA
         </CardTitle>
-        <CardDescription>
+        {/* <CardDescription>
           Weather conditions for each half of the month
-        </CardDescription>
+        </CardDescription> */}
       </CardHeader>
-      <CardContent className="px-6">
+      <CardContent className="px-0">
         <div className="grid grid-cols-12 gap-2 md:gap-3 lg:gap-4">
           <div className="flex flex-col items-center space-y-2">
-            <span className="text-xs md:text-sm font-medium text-muted-foreground">
+            <span className="text-xs font-medium text-muted-foreground">
               Jan
             </span>
             <div className="flex flex-col space-y-1">
@@ -42,7 +36,7 @@ export function WeatherRatingsCard() {
             </div>
           </div>
           <div className="flex flex-col items-center space-y-2">
-            <span className="text-xs md:text-sm font-medium text-muted-foreground">
+            <span className="text-xs font-medium text-muted-foreground">
               Feb
             </span>
             <div className="flex flex-col space-y-1">
@@ -57,7 +51,7 @@ export function WeatherRatingsCard() {
             </div>
           </div>
           <div className="flex flex-col items-center space-y-2">
-            <span className="text-xs md:text-sm font-medium text-muted-foreground">
+            <span className="text-xs font-medium text-muted-foreground">
               Mar
             </span>
             <div className="flex flex-col space-y-1">
@@ -72,7 +66,7 @@ export function WeatherRatingsCard() {
             </div>
           </div>
           <div className="flex flex-col items-center space-y-2">
-            <span className="text-xs md:text-sm font-medium text-muted-foreground">
+            <span className="text-xs font-medium text-muted-foreground">
               Apr
             </span>
             <div className="flex flex-col space-y-1">
@@ -87,7 +81,7 @@ export function WeatherRatingsCard() {
             </div>
           </div>
           <div className="flex flex-col items-center space-y-2">
-            <span className="text-xs md:text-sm font-medium text-muted-foreground">
+            <span className="text-xs font-medium text-muted-foreground">
               May
             </span>
             <div className="flex flex-col space-y-1">
@@ -102,7 +96,7 @@ export function WeatherRatingsCard() {
             </div>
           </div>
           <div className="flex flex-col items-center space-y-2">
-            <span className="text-xs md:text-sm font-medium text-muted-foreground">
+            <span className="text-xs font-medium text-muted-foreground">
               Jun
             </span>
             <div className="flex flex-col space-y-1">
@@ -117,7 +111,7 @@ export function WeatherRatingsCard() {
             </div>
           </div>
           <div className="flex flex-col items-center space-y-2">
-            <span className="text-xs md:text-sm font-medium text-muted-foreground">
+            <span className="text-xs font-medium text-muted-foreground">
               Jul
             </span>
             <div className="flex flex-col space-y-1">
@@ -132,7 +126,7 @@ export function WeatherRatingsCard() {
             </div>
           </div>
           <div className="flex flex-col items-center space-y-2">
-            <span className="text-xs md:text-sm font-medium text-muted-foreground">
+            <span className="text-xs font-medium text-muted-foreground">
               Aug
             </span>
             <div className="flex flex-col space-y-1">
@@ -147,7 +141,7 @@ export function WeatherRatingsCard() {
             </div>
           </div>
           <div className="flex flex-col items-center space-y-2">
-            <span className="text-xs md:text-sm font-medium text-muted-foreground">
+            <span className="text-xs font-medium text-muted-foreground">
               Sep
             </span>
             <div className="flex flex-col space-y-1">
@@ -162,7 +156,7 @@ export function WeatherRatingsCard() {
             </div>
           </div>
           <div className="flex flex-col items-center space-y-2">
-            <span className="text-xs md:text-sm font-medium text-muted-foreground">
+            <span className="text-xs font-medium text-muted-foreground">
               Oct
             </span>
             <div className="flex flex-col space-y-1">
@@ -177,7 +171,7 @@ export function WeatherRatingsCard() {
             </div>
           </div>
           <div className="flex flex-col items-center space-y-2">
-            <span className="text-xs md:text-sm font-medium text-muted-foreground">
+            <span className="text-xs font-medium text-muted-foreground">
               Nov
             </span>
             <div className="flex flex-col space-y-1">
@@ -192,7 +186,7 @@ export function WeatherRatingsCard() {
             </div>
           </div>
           <div className="flex flex-col items-center space-y-2">
-            <span className="text-xs md:text-sm font-medium text-muted-foreground">
+            <span className="text-xs font-medium text-muted-foreground">
               Dec
             </span>
             <div className="flex flex-col space-y-1">

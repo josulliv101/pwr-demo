@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import DualButton from "./dual-button";
 
 import { useSelectedPeriod } from "./SelectedPeriodContext";
@@ -13,7 +14,7 @@ export default function FilterByMonth({ className = "" }: FilterByMonthProps) {
   const { selectedPeriod: activeMonth, setSelectedPeriod: setActiveMonth } =
     useSelectedPeriod();
   return (
-    <div className={`grid grid-cols-6 gap-2 ${className}`}>
+    <div className={cn("grid grid-cols-6 gap-2", className)}>
       {getFullMonthNames().map((month, index) => (
         <DualButton
           label={month}

@@ -5,6 +5,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import data from "@/data/cities.json";
 import { getIconNameByDigit } from "./WeatherIcon";
 import { useSelectedPeriod } from "./SelectedPeriodContext";
+import FilterByMonth from "./FilterByMonth";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 const createGeoJsonData = (period: number, showSunnyDays: boolean) => ({
@@ -398,7 +399,11 @@ const MapboxExample = () => {
   }, [selectedPeriod, showSunnyDays, updateMapData]);
 
   return (
-    <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+    <div
+      className="relative"
+      style={{ height: "100%", display: "flex", flexDirection: "column" }}
+    >
+      <FilterByMonth className="grid-cols-6 w-full px-8 absolute top-14 left-1/2 -translate-1/2 z-50" />
       <div
         ref={mapContainerRef}
         style={{ flex: 1 }}
