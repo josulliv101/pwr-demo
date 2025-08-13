@@ -9,7 +9,7 @@ import {
 
 export function WeatherRatingsCard() {
   return (
-    <Card className="w-full max-w-6xl">
+    <Card className="w-full max-w-6xl border-0">
       <CardHeader>
         <CardTitle className="font-heading text-2xl">
           San Francisco, CA

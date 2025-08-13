@@ -35,7 +35,7 @@ export const Page: React.FC = () => {
                 <ShowSunnyDaysToggle className="col-span-7" />
               </WeatherLegend>
               {/* <Separator className="my-6" /> */}
-              <SidebarTabs />
+              <SidebarTabs showSunnyDays={showSunnyDays} />
             </div>
             <div className="flex items-center gap-5 mt-4 px-4 py-3 bg-accent rounded-lg">
               <Info className="text-gray-400 w-6 h-6" aria-label="Info" />

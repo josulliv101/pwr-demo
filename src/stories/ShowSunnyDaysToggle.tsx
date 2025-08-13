@@ -24,7 +24,7 @@ export function ShowSunnyDaysToggle({ className }: ShowSunnyDaysToggleProps) {
         />
         <div className="grid gap-1.5 font-normal">
           <p className="text-muted-foreground text-sm">
-            Highlight periods with more sunny days (
+            Highlight comfort zones with more sunny days (
             <Circle className="inline-block fill-yellow-300 stroke-1 w-2 h-2" />
             )
           </p>

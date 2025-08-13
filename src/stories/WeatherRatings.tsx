@@ -36,6 +36,7 @@ export type YearlyWeatherIconsProps = {
   months?: readonly string[];
   data?: MonthPair[];
   showLabels?: boolean;
+  showSunnyDays?: boolean;
   compact?: boolean;
   cityLabel?: string;
   className?: string;
@@ -45,6 +46,7 @@ export function YearlyWeatherIcons({
   months = MONTHS as unknown as string[],
   data = DEFAULT_YEAR,
   showLabels = true,
+  showSunnyDays,
   compact = false,
   cityLabel,
   className,
@@ -100,7 +102,10 @@ export function YearlyWeatherIcons({
                       weatherIconMap2[pair.start].label
                     }`}
                   >
-                    <StartIcon dot className={iconClassName} />
+                    <StartIcon
+                      dot={showSunnyDays && idx % 2 === 0}
+                      className={iconClassName}
+                    />
                   </div>
                   <div
                     role="img"

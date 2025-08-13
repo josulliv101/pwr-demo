@@ -72,7 +72,7 @@ const MapboxExample = () => {
           showRoadLabels: false,
           showPointOfInterestLabels: false,
           showTransitLabels: false,
-          theme: "monochrome",
+          // theme: "monochrome",
         },
       },
     });
@@ -397,20 +397,39 @@ const MapboxExample = () => {
       updateMapData(selectedPeriod, showSunnyDays);
     }
   }, [selectedPeriod, showSunnyDays, updateMapData]);
-
+  const [monthName, halfLabel] = getMonthAndHalf(selectedPeriod);
   return (
     <div
-      className="relative"
+      className="relative bg-accent rounded-lg border justify-between"
       style={{ height: "100%", display: "flex", flexDirection: "column" }}
     >
-      <FilterByMonth className="grid-cols-6 w-full px-8 absolute top-14 left-1/2 -translate-1/2 z-50" />
+      <FilterByMonth className="grid-cols-12 w-full px-2 py-2 absolute_ top-14_ left-1/2_ -translate-1/2_ z-50" />
       <div
         ref={mapContainerRef}
-        style={{ flex: 1 }}
-        className="map-container rounded-lg"
+        // style={{ flex: 1 }}
+        className="map-container rounded-b-lg h-[calc(100%-54px)] w-full"
       />
+      <div className="min-w-64 border-0 bg-blue-500 font-semibold text-accent text-3xl px-5 py-3 absolute bottom-6 right-2 rounded-sm">
+        <div className="text-xs opacity-75">Comfort Zones</div>
+        {monthName}{" "}
+        <span className="text-[16px] font-semibold">
+          &nbsp; <sup className="relative top-[0px] text-lg">{halfLabel}</sup>
+        </span>
+      </div>
     </div>
   );
 };
 
 export default MapboxExample;
+
+export function getMonthAndHalf(period: number): [string, string] {
+  const monthIndex = Math.floor(period / 2); // 0–11
+  const date = new Date(2000, monthIndex, 1); // Arbitrary year & day
+
+  const monthName = new Intl.DateTimeFormat("en", { month: "long" }).format(
+    date
+  );
+  const halfLabel = period % 2 === 0 ? "First Half" : "Second Half";
+
+  return [monthName, halfLabel];
+}

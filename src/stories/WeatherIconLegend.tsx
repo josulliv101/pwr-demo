@@ -65,7 +65,9 @@ export default function WeatherLegend({
                   <TooltipTrigger asChild>
                     <div className="flex flex-col items-center  cursor-pointer hover:bg-accent _hover:scale-105 transition-transform duration-200">
                       <div className="flex flex-row items-center justify-center w-12 h-8 bg-gray-50 rounded-lg border-none border-gray-200   transition-all duration-200">
-                        <IconComponent />
+                        <IconComponent
+                          className={showSunnyIcon ? "" : "w-7 h-7"}
+                        />
                         {showSunnyIcon && <IconComponent dot />}
                       </div>
                       <span className="text-[11px] font-medium text-gray-700 text-center break-words whitespace-break-spaces py-1">
