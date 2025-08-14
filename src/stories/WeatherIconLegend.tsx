@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/tooltip";
 import { weatherIconMap2 } from "./WeatherIcon";
 import type { PropsWithChildren } from "react";
+import { cn } from "@/lib/utils";
 
 const weatherDetails = {
   cold: {
@@ -47,10 +48,11 @@ const weatherDetails = {
 
 export default function WeatherLegend({
   children,
+  className,
   showSunnyIcon,
-}: PropsWithChildren<{ showSunnyIcon?: boolean }>) {
+}: PropsWithChildren<{ showSunnyIcon?: boolean; className?: string }>) {
   return (
-    <div className="bg-white">
+    <div className={cn("bg-white", className)}>
       {/* <h2 className=" font-bold   mb-8 text-gray-800">Weather Icon Legend</h2> */}
 
       <TooltipProvider>

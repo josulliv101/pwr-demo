@@ -5,7 +5,8 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import data from "@/data/cities.json";
 import { getIconNameByDigit } from "./WeatherIcon";
 import { useSelectedPeriod } from "./SelectedPeriodContext";
-import FilterByMonth from "./FilterByMonth";
+// import FilterByMonth from "./FilterByMonth";
+import SlidingPopupButtons from "@/components/sliding-popup-buttons";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 const createGeoJsonData = (period: number, showSunnyDays: boolean) => ({
@@ -397,19 +398,21 @@ const MapboxExample = () => {
       updateMapData(selectedPeriod, showSunnyDays);
     }
   }, [selectedPeriod, showSunnyDays, updateMapData]);
-  const [monthName, halfLabel] = getMonthAndHalf(selectedPeriod);
+  // const [monthName, halfLabel] = getMonthAndHalf(selectedPeriod);
   return (
     <div
       className="relative bg-accent rounded-lg border justify-between"
       style={{ height: "100%", display: "flex", flexDirection: "column" }}
     >
-      <FilterByMonth className="grid-cols-12 w-full px-2 py-2 absolute_ top-14_ left-1/2_ -translate-1/2_ z-50" />
+      <div className="px-4 py-2">
+        <SlidingPopupButtons showSunnyDays={showSunnyDays} />
+      </div>
       <div
         ref={mapContainerRef}
         // style={{ flex: 1 }}
-        className="map-container rounded-b-lg h-[calc(100%-54px)] w-full"
+        className="map-container rounded-b-lg h-[calc(100%-0px)] w-full"
       />
-      <div className="min-w-[310px] w-[310px] border-0 bg-blue-500 font-semibold text-accent text-3xl px-5 py-3 absolute top-16 right-2 rounded-sm">
+      {/* <div className="min-w-[310px] w-[310px] border-0 bg-blue-500 font-semibold text-accent text-3xl px-5 py-3 absolute top-16 right-2 rounded-sm">
         <div className="text-xs opacity-75">
           Displaying 600 Comfort Zones Worldwide
         </div>
@@ -417,7 +420,7 @@ const MapboxExample = () => {
         <span className="text-[16px] font-semibold">
           &nbsp; <sup className="relative top-[0px] text-lg">{halfLabel}</sup>
         </span>
-      </div>
+      </div> */}
     </div>
   );
 };

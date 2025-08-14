@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import "./header.css";
 import Logo, { LogoLabel } from "./Logo";
 import { Searchbox } from "./Searchbox";
-import { ShowSunnyDaysToggle } from "./ShowSunnyDaysToggle";
+// import { ShowSunnyDaysToggle } from "./ShowSunnyDaysToggle";
 
 type User = {
   name: string;
@@ -27,7 +27,7 @@ export const Header = ({ user }: HeaderProps) => (
         </Logo>
       </div>
       <div className="flex grow justify-between items-center col-span-8 gap-4">
-        <ShowSunnyDaysToggle className="col-span-7 " />
+        <div />
         <div className="flex items-center gap-4">
           <Searchbox />
           {user ? <></> : <></>}

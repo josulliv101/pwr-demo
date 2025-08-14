@@ -6,7 +6,7 @@ import { YearlyWeatherIcons } from "./WeatherRatings";
 
 export function SidebarTabs({ showSunnyDays }: { showSunnyDays?: boolean }) {
   return (
-    <div className="flex w-full max-w-sm__ flex-col gap-6 mt-6 overflow-y-auto">
+    <div className="flex w-full max-w-sm__ flex-col gap-6 mt-0 overflow-y-auto">
       <Tabs defaultValue="password">
         <TabsList className="bg-none">
           {/* <TabsTrigger value="account">Time Periods</TabsTrigger> */}
@@ -16,7 +16,7 @@ export function SidebarTabs({ showSunnyDays }: { showSunnyDays?: boolean }) {
         </TabsList>
 
         <TabsContent value="password">
-          <Card className="py-0 w-full border-0 shadow-none ">
+          <Card className="py-0 w-full border-0 shadow-none mt-2">
             {/* <CardHeader>
               <CardTitle>Password</CardTitle>
               <CardDescription>

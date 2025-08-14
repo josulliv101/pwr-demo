@@ -2,7 +2,7 @@ import React from "react";
 
 import { Header } from "./Header";
 import "./page.css";
-import WeatherLegend from "./WeatherIconLegend";
+// import WeatherLegend from "./WeatherIconLegend";
 import { Info } from "lucide-react";
 import MapboxExample from "./MapExample";
 // import { YearlyWeatherIcons } from "./WeatherRatings";
@@ -10,6 +10,7 @@ import Footer from "./Footer";
 
 import { SidebarTabs } from "./SidebarTabs";
 import { useSelectedPeriod } from "./SelectedPeriodContext";
+// import { ShowSunnyDaysToggle } from "./ShowSunnyDaysToggle";
 
 type User = {
   name: string;
@@ -20,7 +21,7 @@ export const Page: React.FC = () => {
   const { showSunnyDays } = useSelectedPeriod();
   return (
     <>
-      <article className="max-w-7xl mx-auto h-[calc(100dvh-65px-16px)] px-4">
+      <article className="max-w-7xl mx-auto h-[calc(100dvh-40px-0px)] px-4">
         <Header
           user={user}
           onLogin={() => setUser({ name: "Jane Doe" })}
@@ -28,11 +29,11 @@ export const Page: React.FC = () => {
           onCreateAccount={() => setUser({ name: "Jane Doe" })}
         />
 
-        <section className="grid grid-cols-12 gap-8 h-[calc(100dvh-16px-148px)] mt-4">
+        <section className="grid grid-cols-12 gap-8 h-[calc(100dvh-0px-130px)] mt-4">
           <div className="col-span-4 flex flex-col justify-between h-full">
             <div>
-              <WeatherLegend showSunnyIcon={showSunnyDays}></WeatherLegend>
-              {/* <Separator className="my-6" /> */}
+              {/* <WeatherLegend showSunnyIcon={showSunnyDays}></WeatherLegend> */}
+              {/* <ShowSunnyDaysToggle className="col-span-7 " /> */}
               <SidebarTabs showSunnyDays={showSunnyDays} />
             </div>
             <div className="flex items-center gap-5 mt-4 px-4 py-3 bg-accent rounded-lg">
