@@ -1,8 +1,11 @@
 // import React from 'react';
 
-import { Button } from "./Button";
+import { Button } from "@/components/ui/button";
+
 import "./header.css";
 import Logo, { LogoLabel } from "./Logo";
+import { Searchbox } from "./Searchbox";
+import { ShowSunnyDaysToggle } from "./ShowSunnyDaysToggle";
 
 type User = {
   name: string;
@@ -15,38 +18,23 @@ export interface HeaderProps {
   onCreateAccount?: () => void;
 }
 
-export const Header = ({
-  user,
-  onLogin,
-  onLogout,
-  onCreateAccount,
-}: HeaderProps) => (
+export const Header = ({ user }: HeaderProps) => (
   <header>
-    <div className="storybook-header">
-      <div className="flex items-center justify-start">
+    <div className="storybook-header grid grid-cols-12 gap-8">
+      <div className="flex items-center justify-start col-span-4">
         <Logo>
           <LogoLabel />
         </Logo>
       </div>
-      <div className="flex grow justify-end items-center">
-        {user ? (
-          <>
-            <span className="welcome">
-              Welcome, <b>{user.name}</b>!
-            </span>
-            <Button size="small" onClick={onLogout} label="Log out" />
-          </>
-        ) : (
-          <>
-            <Button size="small" onClick={onLogin} label="Log in" />
-            <Button
-              primary
-              size="small"
-              onClick={onCreateAccount}
-              label="Take a Guided Tour"
-            />
-          </>
-        )}
+      <div className="flex grow justify-between items-center col-span-8 gap-4">
+        <ShowSunnyDaysToggle className="col-span-7 " />
+        <div className="flex items-center gap-4">
+          <Searchbox />
+          {user ? <></> : <></>}
+          <Button variant="secondary" className="flex items-center gap-2">
+            Login
+          </Button>
+        </div>
       </div>
     </div>
   </header>

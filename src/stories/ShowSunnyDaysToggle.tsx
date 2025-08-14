@@ -11,7 +11,7 @@ export function ShowSunnyDaysToggle({ className }: ShowSunnyDaysToggleProps) {
   const { showSunnyDays, setShowSunnyDays } = useSelectedPeriod();
 
   return (
-    <div className={`w-full flex items-center gap-3 mt-0 ${className ?? ""}`}>
+    <div className={`w-full_ flex items-center gap-3 mt-0 ${className ?? ""}`}>
       <Label
         htmlFor="toggle-2"
         className="w-full hover:bg-accent/50 border-0 flex items-start gap-3 rounded-lg  px-3 py-2 has-[[aria-checked=true]]:border-gray-600 has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:border-gray-900 dark:has-[[aria-checked=true]]:bg-gray-950"

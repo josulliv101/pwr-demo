@@ -7,7 +7,7 @@ import { Info } from "lucide-react";
 import MapboxExample from "./MapExample";
 // import { YearlyWeatherIcons } from "./WeatherRatings";
 import Footer from "./Footer";
-import { ShowSunnyDaysToggle } from "./ShowSunnyDaysToggle";
+
 import { SidebarTabs } from "./SidebarTabs";
 import { useSelectedPeriod } from "./SelectedPeriodContext";
 
@@ -31,9 +31,7 @@ export const Page: React.FC = () => {
         <section className="grid grid-cols-12 gap-8 h-[calc(100dvh-16px-148px)] mt-4">
           <div className="col-span-4 flex flex-col justify-between h-full">
             <div>
-              <WeatherLegend showSunnyIcon={showSunnyDays}>
-                <ShowSunnyDaysToggle className="col-span-7" />
-              </WeatherLegend>
+              <WeatherLegend showSunnyIcon={showSunnyDays}></WeatherLegend>
               {/* <Separator className="my-6" /> */}
               <SidebarTabs showSunnyDays={showSunnyDays} />
             </div>
