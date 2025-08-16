@@ -3,7 +3,7 @@ import React from "react";
 import { Header } from "./Header";
 import "./page.css";
 // import WeatherLegend from "./WeatherIconLegend";
-import { Info } from "lucide-react";
+
 import MapboxExample from "./MapExample";
 // import { YearlyWeatherIcons } from "./WeatherRatings";
 import Footer from "./Footer";
@@ -18,7 +18,7 @@ type User = {
 
 export const Page: React.FC = () => {
   const [user, setUser] = React.useState<User>();
-  const { showSunnyDays } = useSelectedPeriod();
+  const { showSunnyDays, activeCityIds } = useSelectedPeriod();
   return (
     <>
       <article className="max-w-7xl mx-auto h-[calc(100dvh-40px-0px)] px-4">
@@ -34,14 +34,12 @@ export const Page: React.FC = () => {
             <div>
               {/* <WeatherLegend showSunnyIcon={showSunnyDays}></WeatherLegend> */}
               {/* <ShowSunnyDaysToggle className="col-span-7 " /> */}
-              <SidebarTabs showSunnyDays={showSunnyDays} />
+              <SidebarTabs
+                showSunnyDays={showSunnyDays}
+                activeCityIds={activeCityIds}
+              />
             </div>
-            <div className="flex items-center gap-5 mt-4 px-4 py-3 bg-accent rounded-lg">
-              <Info className="text-gray-400 w-6 h-6" aria-label="Info" />
-              <p className="text-gray-800 text-xs italic ">
-                Blue icons denote pleasant, comfortable weather.
-              </p>
-            </div>
+
             {/* <YearlyWeatherIcons
               cityLabel="San Francisco, CA"
               className="mt-8"

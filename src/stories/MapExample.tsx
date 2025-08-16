@@ -39,7 +39,8 @@ const MapboxExample = () => {
   const mapRef = useRef<mapboxgl.Map | null>(null);
 
   // const [selectedPeriod, setSelectedPeriod] = useState<number>(0); // 0–23
-  const { selectedPeriod, showSunnyDays } = useSelectedPeriod();
+  const { selectedPeriod, showSunnyDays, setActiveCityIds } =
+    useSelectedPeriod();
 
   // Keep a ref to the current data so we can update without recreating map
   const geoJsonRef = useRef(createGeoJsonData(selectedPeriod, showSunnyDays));
@@ -100,6 +101,12 @@ const MapboxExample = () => {
         cluster: false,
       });
 
+      const popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false,
+        anchor: "top-left",
+      });
+
       Promise.all(
         iconNames.map(
           (name) =>
@@ -152,6 +159,56 @@ const MapboxExample = () => {
                 "text-color": "#000",
                 "text-halo-color": "#fff",
                 "text-halo-width": 1,
+              },
+            });
+
+            mapRef.current?.addInteraction(`${name}-icon-click`, {
+              type: "click",
+              target: { layerId: `${name}-icon` },
+              handler: (e) => {
+                if (!e.feature || !mapRef.current) return;
+
+                const id = e.feature.properties?.id as string;
+                setActiveCityIds((prev) => {
+                  if (prev.includes(id)) {
+                    return prev.filter((cityId) => cityId !== id);
+                  } else {
+                    return [...prev, id];
+                  }
+                });
+                // Populate the popup and set its coordinates based on the feature found.
+              },
+            });
+
+            mapRef.current?.addInteraction(`${name}-icon-mouseenter`, {
+              type: "mouseenter",
+              target: { layerId: `${name}-icon` },
+              handler: (e) => {
+                console.log("Mouse enter on places layer", e.feature);
+                if (!e.feature || !mapRef.current) return;
+                mapRef.current.getCanvas().style.cursor = "pointer";
+                const coordinates = (
+                  e.feature.geometry as GeoJSON.Point
+                ).coordinates.slice() as [number, number];
+                const description = e.feature.properties?.name as string;
+                // Populate the popup and set its coordinates based on the feature found.
+                popup
+                  .setLngLat(coordinates)
+                  .addClassName("mapboxgl-popup")
+                  // .setOffset([0, -25]) // Offset to position above the icon
+                  .setHTML(description)
+                  .addTo(mapRef.current);
+              },
+            });
+
+            mapRef.current?.addInteraction(`${name}-icon-mouseleave`, {
+              type: "mouseleave",
+              target: { layerId: `${name}-icon` },
+              handler: () => {
+                if (!mapRef.current) return;
+                mapRef.current.getCanvas().style.cursor = "";
+                // mapRef.current && mapRef.current.getCanvas().style.cursor = '';
+                popup.remove();
               },
             });
           });

@@ -5,6 +5,12 @@ import { Button } from "@/components/ui/button";
 import "./header.css";
 import Logo, { LogoLabel } from "./Logo";
 import { Searchbox } from "./Searchbox";
+import { Info } from "lucide-react";
+import {
+  WeatherIconCool,
+  WeatherIconMild,
+  WeatherIconWarm,
+} from "./WeatherIcon";
 // import { ShowSunnyDaysToggle } from "./ShowSunnyDaysToggle";
 
 type User = {
@@ -27,7 +33,16 @@ export const Header = ({ user }: HeaderProps) => (
         </Logo>
       </div>
       <div className="flex grow justify-between items-center col-span-8 gap-4">
-        <div />
+        <div className="flex items-center gap-2 mt-0 px-0 py-3 bg-accent_ rounded-lg">
+          <Info className="text-gray-5300 w-4 h-4 stroke-1" aria-label="Info" />
+          <div className="text-gray-800 text-sm italic ">
+            Icons &nbsp;
+            <WeatherIconCool className="w-5 h-5" />{" "}
+            <WeatherIconMild className="w-5 h-5" />{" "}
+            <WeatherIconWarm className="w-5 h-5" />
+            &nbsp; denote pleasant, comfortable weather.
+          </div>
+        </div>
         <div className="flex items-center gap-4">
           <Searchbox />
           {user ? <></> : <></>}

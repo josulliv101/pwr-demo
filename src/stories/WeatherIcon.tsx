@@ -36,32 +36,36 @@ export const WeatherIcon = ({
     // rotation for featured
     featured && "-rotate-45",
     // positioning and divider helper
-    "relative scale-[.65]",
+    "relative scale-[.65] top-[3px]",
     "before:content-[''] before:absolute before:top-0 before:bottom-0 before:left-1/2 before:-translate-x-1/2 before:w-[2px]",
     divider && (filled ? "before:bg-white" : "before:bg-black"),
     className
   );
 
   return (
-    <Badge variant={filled ? "default" : "outline"} className={classNames}>
+    <div className="relative inline-block">
+      <Badge variant={filled ? "default" : "outline"} className={classNames}>
+        <div
+          className={clsx(
+            "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center",
+            featured && "rotate-45"
+          )}
+        >
+          {children}
+        </div>
+      </Badge>
       {dot && (
         <div
           className={clsx(
-            "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-yellow-400 rounded-full border",
+            "absolute top-0 left-1/2  translate-y-1/2  w-2 h-2 bg-yellow-400 rounded-full border",
             "border-black",
-            classNameDot
+            classNameDot,
+            featured ? "translate-x-[2.5px]" : "translate-x-[3px]",
+            "border-white"
           )}
         />
       )}
-      <div
-        className={clsx(
-          "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center",
-          featured && "rotate-45"
-        )}
-      >
-        {children}
-      </div>
-    </Badge>
+    </div>
   );
 };
 

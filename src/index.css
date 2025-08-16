@@ -130,3 +130,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.mapboxgl-popup {
+  z-index: 1000;
+}

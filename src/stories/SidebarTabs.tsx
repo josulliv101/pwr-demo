@@ -4,7 +4,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { HeartIcon } from "lucide-react";
 import { YearlyWeatherIcons } from "./WeatherRatings";
 
-export function SidebarTabs({ showSunnyDays }: { showSunnyDays?: boolean }) {
+export function SidebarTabs({
+  showSunnyDays,
+  activeCityIds,
+}: {
+  showSunnyDays?: boolean;
+  activeCityIds?: string[];
+}) {
   return (
     <div className="flex w-full max-w-sm__ flex-col gap-6 mt-0 overflow-y-auto">
       <Tabs defaultValue="password">
@@ -25,18 +31,13 @@ export function SidebarTabs({ showSunnyDays }: { showSunnyDays?: boolean }) {
               </CardDescription>
             </CardHeader> */}
             <CardContent className="grid gap-6 px-0 border-0 ">
-              <YearlyWeatherIcons
-                cityLabel="Boston"
-                showSunnyDays={showSunnyDays}
-              />
-              <YearlyWeatherIcons
-                cityLabel="San Francisco"
-                showSunnyDays={showSunnyDays}
-              />
-              <YearlyWeatherIcons
-                cityLabel="Seattle"
-                showSunnyDays={showSunnyDays}
-              />
+              {JSON.stringify(activeCityIds)}
+              {activeCityIds?.map((cityId) => (
+                <YearlyWeatherIcons
+                  cityLabel={cityId}
+                  showSunnyDays={showSunnyDays}
+                />
+              ))}
             </CardContent>
             {/* <CardFooter>
               <Button>Save password</Button>

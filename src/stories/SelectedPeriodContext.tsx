@@ -7,6 +7,8 @@ type SelectedPeriodContextType = {
   setSelectedPeriod: (value: number) => void;
   showSunnyDays: boolean;
   setShowSunnyDays: (value: boolean) => void;
+  activeCityIds: string[];
+  setActiveCityIds: (value: string[] | ((prev: string[]) => string[])) => void;
 };
 
 const SelectedPeriodContext = createContext<
@@ -23,6 +25,9 @@ export const SelectedPeriodProvider = ({
   );
   const [showSunnyDays, setShowSunnyDays] = useState<boolean>(false);
 
+  // ✅ New state for active city IDs
+  const [activeCityIds, setActiveCityIds] = useState<string[]>([]);
+
   return (
     <SelectedPeriodContext.Provider
       value={{
@@ -30,6 +35,8 @@ export const SelectedPeriodProvider = ({
         setSelectedPeriod,
         showSunnyDays,
         setShowSunnyDays,
+        activeCityIds,
+        setActiveCityIds,
       }}
     >
       {children}

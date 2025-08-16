@@ -15,12 +15,12 @@ export default function Logo({
   return (
     <Button
       variant={"ghost"}
-      className={`gap-4  border h-16 min-w-0 p-0 px-0 py-0 ps-0 pe-0 scale-50 origin-left ${
+      className={`gap-5  border h-16 min-w-0 p-0 px-0 py-0 ps-0 pe-0 scale-[.6] origin-left ${
         className ?? ""
       }`}
       {...props}
     >
-      <div className="grid grid-cols-2 gap-1 mt-4">
+      <div className="grid grid-cols-2 gap-1 mt-2">
         <div className="flex items-center justify-center">
           <WeatherIconMild />
         </div>
