@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import "./header.css";
 import Logo, { LogoLabel } from "./Logo";
 import { Searchbox } from "./Searchbox";
-import { Info } from "lucide-react";
+// import { Info } from "lucide-react";
 import {
   WeatherIconCool,
   WeatherIconMild,
@@ -34,7 +34,10 @@ export const Header = ({ user }: HeaderProps) => (
       </div>
       <div className="flex grow justify-between items-center col-span-8 gap-4">
         <div className="flex items-center gap-2 mt-0 px-0 py-3 bg-accent_ rounded-lg">
-          <Info className="text-gray-5300 w-4 h-4 stroke-1" aria-label="Info" />
+          {/* <Info
+            className="hidden text-gray-5300 w-4 h-4 stroke-1"
+            aria-label="Info"
+          /> */}
           <div className="text-gray-800 text-sm italic ">
             Icons &nbsp;
             <WeatherIconCool className="w-5 h-5" />{" "}

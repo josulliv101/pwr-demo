@@ -462,7 +462,7 @@ const MapboxExample = () => {
       style={{ height: "100%", display: "flex", flexDirection: "column" }}
     >
       <div className="px-4 py-2">
-        <SlidingPopupButtons showSunnyDays={showSunnyDays} />
+        <SlidingPopupButtons showSunnyDays={false} />
       </div>
       <div
         ref={mapContainerRef}

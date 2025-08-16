@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import WeatherLegend from "@/stories/WeatherIconLegend";
+// import WeatherLegend from "@/stories/WeatherIconLegend";
 import { ShowSunnyDaysToggle } from "@/stories/ShowSunnyDaysToggle";
 
 interface ButtonData {
@@ -213,7 +213,7 @@ export default function SlidingPopupButtons({
   const [popupPosition, setPopupPosition] = useState({ left: 0, arrowLeft: 0 });
   const buttonRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
   const containerRef = useRef<HTMLDivElement>(null);
-
+  console.log(showSunnyDays, "showSunnyDays");
   // Calculate popup position based on active button
   useEffect(() => {
     const activeButtonElement = buttonRefs.current[activeButton.monthId];
@@ -358,10 +358,10 @@ export default function SlidingPopupButtons({
           </div>
 
           {/* <p className="text-sm text-gray-300">{activeContent?.description}</p> */}
-          <WeatherLegend
+          {/* <WeatherLegend
             className="rounded-sm"
             showSunnyIcon={showSunnyDays}
-          ></WeatherLegend>
+          ></WeatherLegend> */}
         </div>
 
         {/* Arrow pointing up */}

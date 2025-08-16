@@ -10,6 +10,7 @@ import Footer from "./Footer";
 
 import { SidebarTabs } from "./SidebarTabs";
 import { useSelectedPeriod } from "./SelectedPeriodContext";
+import WeatherLegend from "./WeatherIconLegend";
 // import { ShowSunnyDaysToggle } from "./ShowSunnyDaysToggle";
 
 type User = {
@@ -32,7 +33,10 @@ export const Page: React.FC = () => {
         <section className="grid grid-cols-12 gap-8 h-[calc(100dvh-0px-130px)] mt-4">
           <div className="col-span-4 flex flex-col justify-between h-full">
             <div>
-              {/* <WeatherLegend showSunnyIcon={showSunnyDays}></WeatherLegend> */}
+              <WeatherLegend
+                // showSunnyIcon={showSunnyDays}
+                className="bg-accent text-white pt-1 rounded-t-lg mb-4 px-2 border"
+              ></WeatherLegend>
               {/* <ShowSunnyDaysToggle className="col-span-7 " /> */}
               <SidebarTabs
                 showSunnyDays={showSunnyDays}
