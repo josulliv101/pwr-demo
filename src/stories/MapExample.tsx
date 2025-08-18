@@ -7,6 +7,7 @@ import { getIconNameByDigit } from "./WeatherIcon";
 import { useSelectedPeriod } from "./SelectedPeriodContext";
 // import FilterByMonth from "./FilterByMonth";
 import SlidingPopupButtons from "@/components/sliding-popup-buttons";
+import { ShowSunnyDaysToggle } from "./ShowSunnyDaysToggle";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 const createGeoJsonData = (period: number, showSunnyDays: boolean) => ({
@@ -462,6 +463,12 @@ const MapboxExample = () => {
       style={{ height: "100%", display: "flex", flexDirection: "column" }}
     >
       <div className="px-4 py-2">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xs font-normal  px-2 my-1 text-gray-800">
+            Select a Time Period
+          </h2>
+          <ShowSunnyDaysToggle className="col-span-7 pt-0 relative top-1 text-accent-foreground text-xs" />
+        </div>
         <SlidingPopupButtons showSunnyDays={false} />
       </div>
       <div

@@ -52,8 +52,10 @@ export default function WeatherLegend({
   showSunnyIcon,
 }: PropsWithChildren<{ showSunnyIcon?: boolean; className?: string }>) {
   return (
-    <div className={cn("bg-white", className)}>
-      {/* <h2 className=" font-bold   mb-8 text-gray-800">Weather Icon Legend</h2> */}
+    <div className={cn("bg-white_", className)}>
+      <h2 className="text-xs font-normal  px-2 my-1 text-gray-800">
+        Select a Comfort Zone
+      </h2>
 
       <TooltipProvider>
         <div className="shadow-sm__ border-0 px-0 rounded-lg grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-0 max-w-6xl mx-auto">
@@ -66,7 +68,7 @@ export default function WeatherLegend({
                 <Tooltip key={key}>
                   <TooltipTrigger asChild>
                     <div className="flex flex-col items-center  cursor-pointer hover:bg-accent _hover:scale-105 transition-transform duration-200">
-                      <div className="flex flex-row items-center justify-center w-12 h-8 bg-gray-50 rounded-lg border-none border-gray-200   transition-all duration-200">
+                      <div className="flex flex-row items-center justify-center w-12 h-8 bg-gray-50_ rounded-lg border-none border-gray-200   transition-all duration-200">
                         <IconComponent
                           className={showSunnyIcon ? "" : "w-7 h-7"}
                         />

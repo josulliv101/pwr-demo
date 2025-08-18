@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { HeartIcon } from "lucide-react";
+// import { HeartIcon } from "lucide-react";
 import { YearlyWeatherIcons, type Tuple } from "./WeatherRatings";
 import cities from "../data/cities.json";
 const cityDataMap: Record<
@@ -49,15 +49,16 @@ export function SidebarTabs({
   return (
     <div className="flex w-full max-w-sm__ flex-col gap-6 mt-0 overflow-y-auto">
       <Tabs defaultValue="password">
-        <TabsList className="bg-none">
-          {/* <TabsTrigger value="account">Time Periods</TabsTrigger> */}
-          <TabsTrigger value="password">
-            <HeartIcon className="stroke-0 fill-gray-600" /> My Cities
-          </TabsTrigger>
+        <TabsList className="bg-none shadow-none border-0 rounded-lg px-0">
+          <TabsTrigger value="password" className="bg-none shadow-none">
+            Compare Cities
+            {/* <HeartIcon className="stroke-0 fill-gray-600" /> My Cities */}
+          </TabsTrigger>{" "}
+          <TabsTrigger value="account">Worldwide City Rankings</TabsTrigger>
         </TabsList>
 
         <TabsContent value="password">
-          <Card className="py-0 w-full border-0 shadow-none mt-2">
+          <Card className="py-0 w-full border-0 shadow-none mt-2 bg-none">
             {/* <CardHeader>
               <CardTitle>Password</CardTitle>
               <CardDescription>
@@ -65,7 +66,7 @@ export function SidebarTabs({
                 out.
               </CardDescription>
             </CardHeader> */}
-            <CardContent className="grid gap-4 px-0 border-0 ">
+            <CardContent className="grid gap-4 px-0 border-0 bg-none">
               {activeCityIds?.map((cityId) => {
                 const cityData = cityDataMap[cityId];
                 console.log(cityId, cityData, "cityData");

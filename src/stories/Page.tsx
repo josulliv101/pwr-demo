@@ -12,6 +12,7 @@ import { SidebarTabs } from "./SidebarTabs";
 import { useSelectedPeriod } from "./SelectedPeriodContext";
 import WeatherLegend from "./WeatherIconLegend";
 // import { ShowSunnyDaysToggle } from "./ShowSunnyDaysToggle";
+// import { ShowSunnyDaysToggle } from "./ShowSunnyDaysToggle";
 
 type User = {
   name: string;
@@ -30,18 +31,22 @@ export const Page: React.FC = () => {
           onCreateAccount={() => setUser({ name: "Jane Doe" })}
         />
 
-        <section className="grid grid-cols-12 gap-8 h-[calc(100dvh-0px-130px)] mt-4">
-          <div className="col-span-4 flex flex-col justify-between h-full">
-            <div>
+        <section className="grid grid-cols-12 gap-4 h-[calc(100dvh-0px-130px)] mt-4 rounded-t-lg">
+          <div className="col-span-4 flex flex-col justify-between h-full rounded-t-lg">
+            <div className="bg-blue-50 h-full rounded-b-lg rounded-t-lg border">
               <WeatherLegend
                 // showSunnyIcon={showSunnyDays}
-                className="bg-accent text-white pt-1 rounded-t-lg mb-4 px-2 border"
-              ></WeatherLegend>
-              {/* <ShowSunnyDaysToggle className="col-span-7 " /> */}
-              <SidebarTabs
-                showSunnyDays={showSunnyDays}
-                activeCityIds={activeCityIds}
-              />
+                className="bg-accent text-white pt-1 rounded-t-lg mb-4 px-2 border-0"
+              >
+                {/* <ShowSunnyDaysToggle className="col-span-7 pt-3 text-accent-foreground text-xs" /> */}
+              </WeatherLegend>
+
+              <div className=" px-2">
+                <SidebarTabs
+                  showSunnyDays={showSunnyDays}
+                  activeCityIds={activeCityIds}
+                />
+              </div>
             </div>
 
             {/* <YearlyWeatherIcons

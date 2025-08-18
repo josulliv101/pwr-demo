@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 // import WeatherLegend from "@/stories/WeatherIconLegend";
-import { ShowSunnyDaysToggle } from "@/stories/ShowSunnyDaysToggle";
+// import { ShowSunnyDaysToggle } from "@/stories/ShowSunnyDaysToggle";
 
 interface ButtonData {
   id: string;
@@ -345,7 +345,7 @@ export default function SlidingPopupButtons({
 
       {/* Popup Box */}
       <div
-        className="absolute top-full mt-3 bg-blue-500 text-white rounded-lg shadow-lg px-3 py-2 w-100 transition-all duration-300 ease-out z-10"
+        className="absolute top-full mt-3 bg-blue-500 text-white rounded-lg shadow-lg px-3 py-2 w-48 transition-all duration-300 ease-out z-10"
         style={{
           left: `${popupPosition.left}px`,
         }}
@@ -354,7 +354,7 @@ export default function SlidingPopupButtons({
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <h3 className="font-semibold text-white">{activeContent?.title}</h3>
-            <ShowSunnyDaysToggle className="col-span-7 text-white" />
+            {/* <ShowSunnyDaysToggle className="col-span-7 text-white" /> */}
           </div>
 
           {/* <p className="text-sm text-gray-300">{activeContent?.description}</p> */}

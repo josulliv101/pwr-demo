@@ -141,8 +141,8 @@ export function YearlyWeatherIcons({
     ? "min-w-max flex items-end gap-0 py-1"
     : "min-w-max flex items-end gap-0 py-2";
   const monthColClass = compact
-    ? "flex flex-col items-center gap-0 w-full even:bg-accent rounded-sm"
-    : "flex flex-col items-center gap-0 w-full even:bg-accent rounded-sm";
+    ? "flex flex-col items-center gap-0 w-full even:bg-white_ border-r last:border-r-0 rounded-sm"
+    : "flex flex-col items-center gap-0 w-full even:bg-white_ border-r last:border-r-0 rounded-sm";
   const stackClass = compact
     ? "flex flex-col items-center gap-0 -space-y-1 "
     : "flex flex-col items-center gap-0  ";
