@@ -151,7 +151,7 @@ export function YearlyWeatherIcons({
     : "text-xs text-muted-foreground tabular-nums";
 
   // Consistent icon box size per mode.
-  const iconClassName = compact ? "w-4 h-4" : "w-6 h-6";
+  const iconClassName = compact ? "w-4 h-4" : "w-5 h-5";
 
   // City label styling (left-aligned, slightly smaller in compact).
   const cityClass = compact

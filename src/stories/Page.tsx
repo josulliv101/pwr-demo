@@ -11,6 +11,7 @@ import Footer from "./Footer";
 import { SidebarTabs } from "./SidebarTabs";
 import { useSelectedPeriod } from "./SelectedPeriodContext";
 import WeatherLegend from "./WeatherIconLegend";
+import VercelTabs from "@/components/vercel-tabs";
 // import { ShowSunnyDaysToggle } from "./ShowSunnyDaysToggle";
 // import { ShowSunnyDaysToggle } from "./ShowSunnyDaysToggle";
 
@@ -41,7 +42,7 @@ export const Page: React.FC = () => {
                 {/* <ShowSunnyDaysToggle className="col-span-7 pt-3 text-accent-foreground text-xs" /> */}
               </WeatherLegend>
 
-              <div className=" px-2">
+              <div className=" px-2 relative h-[560px]">
                 <SidebarTabs
                   showSunnyDays={showSunnyDays}
                   activeCityIds={activeCityIds}
@@ -63,6 +64,7 @@ export const Page: React.FC = () => {
         </section>
       </article>
       <Footer className="mt-2">
+        <VercelTabs />
         {/* <FilterByMonth initialActiveMonth={getCurrentMonthHalfIndex()} /> */}
       </Footer>
     </>

@@ -1,9 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 
 // import { HeartIcon } from "lucide-react";
 import { YearlyWeatherIcons, type Tuple } from "./WeatherRatings";
 import cities from "../data/cities.json";
+import { ShowSunnyDaysToggle } from "./ShowSunnyDaysToggle";
+
 const cityDataMap: Record<
   string,
   { name: string; weatherRatings?: Array<number> }
@@ -49,13 +51,14 @@ export function SidebarTabs({
   return (
     <div className="flex w-full max-w-sm__ flex-col gap-6 mt-0 overflow-y-auto">
       <Tabs defaultValue="password">
-        <TabsList className="bg-none shadow-none border-0 rounded-lg px-0">
+        {/* <TabsList className="bg-none shadow-none border-0 rounded-lg px-0">
           <TabsTrigger value="password" className="bg-none shadow-none">
             Compare Cities
-            {/* <HeartIcon className="stroke-0 fill-gray-600" /> My Cities */}
+            
           </TabsTrigger>{" "}
-          <TabsTrigger value="account">Worldwide City Rankings</TabsTrigger>
-        </TabsList>
+          <TabsTrigger value="rankings">Rankings</TabsTrigger>
+          <TabsTrigger value="comfort-zones">Comfort Zones</TabsTrigger>
+        </TabsList> */}
 
         <TabsContent value="password">
           <Card className="py-0 w-full border-0 shadow-none mt-2 bg-none">
@@ -65,37 +68,43 @@ export function SidebarTabs({
                 Change your password here. After saving, you&apos;ll be logged
                 out.
               </CardDescription>
-            </CardHeader> */}
-            <CardContent className="grid gap-4 px-0 border-0 bg-none">
-              {activeCityIds?.map((cityId) => {
-                const cityData = cityDataMap[cityId];
-                console.log(cityId, cityData, "cityData");
-                return (
-                  <YearlyWeatherIcons
-                    key={cityId}
-                    cityLabel={cityData?.name || cityId}
-                    showSunnyDays={showSunnyDays}
-                    ratings={
-                      cityData?.weatherRatings?.map((wr) => {
-                        if (wr === 5) {
-                          return 4; // or some default value
-                        } else if (wr === 7) {
-                          return 6;
-                        } else if (wr > 4) {
-                          return wr - 3; // Adjusting the rating
-                        }
-                        return wr;
-                      }) as any
-                    }
-                    sunnyDaysByPeriod={
-                      cityData?.name === "San Diego"
-                        ? sdSunnyDaysByPeriod
-                        : undefined
-                    }
-                  />
-                );
-              })}
-            </CardContent>
+            </CardHeader> */}{" "}
+            <div className="max-w-2xl mx-auto p-6">
+              <h2 className="font-heading font-black text-2xl text-gray-900 mb-2 text-center">
+                Compare City Weather
+              </h2>
+              <ShowSunnyDaysToggle />
+              <CardContent className="grid gap-4 px-0 border-0 bg-none h-full">
+                {activeCityIds?.map((cityId) => {
+                  const cityData = cityDataMap[cityId];
+                  console.log(cityId, cityData, "cityData");
+                  return (
+                    <YearlyWeatherIcons
+                      key={cityId}
+                      cityLabel={cityData?.name || cityId}
+                      showSunnyDays={showSunnyDays}
+                      ratings={
+                        cityData?.weatherRatings?.map((wr) => {
+                          if (wr === 5) {
+                            return 4; // or some default value
+                          } else if (wr === 7) {
+                            return 6;
+                          } else if (wr > 4) {
+                            return wr - 3; // Adjusting the rating
+                          }
+                          return wr;
+                        }) as any
+                      }
+                      sunnyDaysByPeriod={
+                        cityData?.name === "San Diego"
+                          ? sdSunnyDaysByPeriod
+                          : undefined
+                      }
+                    />
+                  );
+                })}
+              </CardContent>
+            </div>
             {/* <CardFooter>
               <Button>Save password</Button>
             </CardFooter> */}

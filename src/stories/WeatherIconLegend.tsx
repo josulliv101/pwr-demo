@@ -7,8 +7,9 @@ import {
 import { weatherIconMap2 } from "./WeatherIcon";
 import type { PropsWithChildren } from "react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
-const weatherDetails = {
+export const weatherDetails = {
   cold: {
     description: "Very cold temperatures, typically below 32°F (0°C)",
     characteristics: "Freezing conditions, potential for ice and snow",
@@ -53,9 +54,19 @@ export default function WeatherLegend({
 }: PropsWithChildren<{ showSunnyIcon?: boolean; className?: string }>) {
   return (
     <div className={cn("bg-white_", className)}>
-      <h2 className="text-xs font-normal  px-2 my-1 text-gray-800">
-        Select a Comfort Zone
-      </h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-xs font-normal  px-2 my-1 text-gray-800">
+          Select a Comfort Zone
+        </h2>
+        <Button
+          size={"sm"}
+          variant={"ghost"}
+          className="text-xs text-gray-500 py-0 bg-gray-200/50 w-fit h-6 font-normal"
+        >
+          {/* <GraduationCapIcon className="w-4 h-4 text-gray-500 stroke-2" /> */}
+          More details
+        </Button>
+      </div>
 
       <TooltipProvider>
         <div className="shadow-sm__ border-0 px-0 rounded-lg grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-0 max-w-6xl mx-auto">
@@ -70,7 +81,9 @@ export default function WeatherLegend({
                     <div className="flex flex-col items-center  cursor-pointer hover:bg-accent _hover:scale-105 transition-transform duration-200">
                       <div className="flex flex-row items-center justify-center w-12 h-8 bg-gray-50_ rounded-lg border-none border-gray-200   transition-all duration-200">
                         <IconComponent
-                          className={showSunnyIcon ? "" : "w-7 h-7"}
+                          className={
+                            showSunnyIcon ? "" : "w-6 h-6 relative top-1.5"
+                          }
                         />
                         {showSunnyIcon && <IconComponent dot />}
                       </div>

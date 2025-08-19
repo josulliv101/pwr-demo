@@ -19,12 +19,12 @@ export default function Footer({
     >
       <div className="grid grid-cols-12 gap-4 max-w-7xl mx-auto px-4    ">
         <div className="col-span-4 flex flex-col items-start justify-end">
+          {children}
+        </div>
+        <div className="col-span-8 flex flex-col items-center justify-end">
           <p className="text-xs opacity-75">
             &copy; {year} {companyName}. All rights reserved.
           </p>
-        </div>
-        <div className="col-span-8 flex flex-col items-center justify-end">
-          {children}
         </div>
       </div>
     </footer>
