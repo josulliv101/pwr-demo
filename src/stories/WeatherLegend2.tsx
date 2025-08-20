@@ -4,10 +4,10 @@ import { weatherIconMap2 } from "./WeatherIcon";
 export default function WeatherLegend2() {
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <h2 className="font-heading font-black text-2xl text-gray-900 mb-2 text-center">
+      <h2 className="font-heading font-black text-2xl text-gray-100 mb-2 text-center">
         Weather Legend
       </h2>
-      <p className="text-gray-600 text-center mb-8">
+      <p className="text-gray-200 text-center mb-8">
         Understanding temperature ranges
       </p>
 

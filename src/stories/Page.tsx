@@ -6,12 +6,14 @@ import "./page.css";
 
 import MapboxExample from "./MapExample";
 // import { YearlyWeatherIcons } from "./WeatherRatings";
-import Footer from "./Footer";
 
 import { SidebarTabs } from "./SidebarTabs";
 import { useSelectedPeriod } from "./SelectedPeriodContext";
 import WeatherLegend from "./WeatherIconLegend";
-import VercelTabs from "@/components/vercel-tabs";
+
+import { Navigation } from "./Navigation";
+import WeatherCitiesList from "@/components/WeatherCitiesList";
+import WeatherLegend2 from "./WeatherLegend2";
 // import { ShowSunnyDaysToggle } from "./ShowSunnyDaysToggle";
 // import { ShowSunnyDaysToggle } from "./ShowSunnyDaysToggle";
 
@@ -23,7 +25,7 @@ export const Page: React.FC = () => {
   const [user, setUser] = React.useState<User>();
   const { showSunnyDays, activeCityIds } = useSelectedPeriod();
   return (
-    <>
+    <Layout>
       <article className="max-w-7xl mx-auto h-[calc(100dvh-40px-0px)] px-4">
         <Header
           user={user}
@@ -63,11 +65,7 @@ export const Page: React.FC = () => {
           </div>
         </section>
       </article>
-      <Footer className="mt-2">
-        <VercelTabs />
-        {/* <FilterByMonth initialActiveMonth={getCurrentMonthHalfIndex()} /> */}
-      </Footer>
-    </>
+    </Layout>
   );
 };
 
@@ -78,4 +76,41 @@ export function getCurrentMonthHalfIndex(): number {
   const isSecondHalf = date > 15; // 1–15 = first half, 16+ = second half
 
   return month * 2 + (isSecondHalf ? 1 : 0);
+}
+
+function Layout({ children }: { children?: React.ReactNode }) {
+  return (
+    <div className="">
+      <section
+        id="section1"
+        className="h-screen w-full bg-gradient-to-br from-gray-50 to-gray-100 flex items-start justify-center"
+      >
+        {children}
+      </section>
+
+      <section
+        id="section2"
+        className="h-screen w-full bg-gradient-to-br from-gray-500 to-gray-700 flex items-center justify-center"
+      >
+        <div className="text-center text-white">
+          <WeatherCitiesList />
+        </div>
+      </section>
+
+      <section
+        id="section3"
+        className="h-screen w-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center"
+      >
+        <div className="text-center text-white">
+          <WeatherLegend2 />
+        </div>
+      </section>
+
+      <Navigation>
+        <div className="text-sm text-gray-600">
+          Content area ready for children
+        </div>
+      </Navigation>
+    </div>
+  );
 }

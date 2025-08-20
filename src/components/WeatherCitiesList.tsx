@@ -30,19 +30,18 @@ const cities = [
 
 export default function WeatherCitiesList() {
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <h1 className="font-heading font-black text-3xl text-gray-900 mb-2 text-center">
+    <div className="max-w-4xl mx-auto p-6">
+      <h1 className="font-heading font-black text-3xl text-gray-100 mb-2 text-center">
         Top 20 Cities
       </h1>
-      <p className="text-gray-600 text-center mb-8">
+      <p className="text-gray-200 text-center mb-8">
         Worldwide rankings by best weather
       </p>
 
-      <div className="space-y-1">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
         {cities.map((city) => (
           <div
             key={city.rank}
-            /* Reduced padding and updated to neutral colors */
             className="flex items-center gap-3 p-2 bg-white rounded-lg border border-gray-200 hover:shadow-sm transition-shadow"
           >
             <div className="flex-1 min-w-0">

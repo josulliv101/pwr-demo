@@ -56,7 +56,7 @@ export default function WeatherLegend({
     <div className={cn("bg-white_", className)}>
       <div className="flex justify-between items-center">
         <h2 className="text-xs font-normal  px-2 my-1 text-gray-800">
-          Select a Comfort Zone
+          Select Comfort Zones
         </h2>
         <Button
           size={"sm"}
@@ -64,7 +64,7 @@ export default function WeatherLegend({
           className="text-xs text-gray-500 py-0 bg-gray-200/50 w-fit h-6 font-normal"
         >
           {/* <GraduationCapIcon className="w-4 h-4 text-gray-500 stroke-2" /> */}
-          More details
+          More on comfort zones
         </Button>
       </div>
 
