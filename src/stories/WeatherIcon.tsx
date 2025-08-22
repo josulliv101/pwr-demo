@@ -104,17 +104,21 @@ export const WeatherIconWarm = (props: WeatherIconProps = {}) => (
   <WeatherIcon
     {...props}
     featured
-    className={clsx("border-blue-500", props.className)}
+    className={clsx("border-blue-500 bg-white", props.className)}
     classNameDot={clsx("border-blue-500", props.classNameDot)}
   />
 );
 
 export const WeatherIconHot = (props: WeatherIconProps = {}) => (
-  <WeatherIcon {...props} divider />
+  <WeatherIcon
+    {...props}
+    className={clsx("  bg-white", props.className)}
+    divider
+  />
 );
 
 export const WeatherIconVeryHot = (props: WeatherIconProps = {}) => (
-  <WeatherIcon {...props} />
+  <WeatherIcon {...props} className={clsx("  bg-white", props.className)} />
 );
 
 export const weatherIconMap2 = {

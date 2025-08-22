@@ -80,6 +80,8 @@ const MapboxExample = () => {
       },
     });
 
+    mapRef.current.addControl(new mapboxgl.NavigationControl(), "bottom-right");
+
     mapRef.current.on("style.load", () => {});
 
     mapRef.current.on("load", () => {
@@ -459,7 +461,7 @@ const MapboxExample = () => {
   // const [monthName, halfLabel] = getMonthAndHalf(selectedPeriod);
   return (
     <div
-      className="relative bg-accent rounded-lg border justify-between"
+      className="relative bg-accent rounded-lg__ border justify-between"
       style={{ height: "100%", display: "flex", flexDirection: "column" }}
     >
       <div className="px-4 py-2">

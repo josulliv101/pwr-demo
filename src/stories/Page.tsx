@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Header } from "./Header";
+import { Header, HeaderFull } from "./Header";
 import "./page.css";
 // import WeatherLegend from "./WeatherIconLegend";
 
@@ -14,6 +14,7 @@ import WeatherLegend from "./WeatherIconLegend";
 import { Navigation } from "./Navigation";
 import WeatherCitiesList from "@/components/WeatherCitiesList";
 import WeatherLegend2 from "./WeatherLegend2";
+import ScrollNavbar from "@/components/scroll-navbar";
 // import { ShowSunnyDaysToggle } from "./ShowSunnyDaysToggle";
 // import { ShowSunnyDaysToggle } from "./ShowSunnyDaysToggle";
 
@@ -22,6 +23,10 @@ type User = {
 };
 
 export const Page: React.FC = () => {
+  return <Home />;
+};
+
+export const PageOrig: React.FC = () => {
   const [user, setUser] = React.useState<User>();
   const { showSunnyDays, activeCityIds } = useSelectedPeriod();
   return (
@@ -111,6 +116,55 @@ function Layout({ children }: { children?: React.ReactNode }) {
           Content area ready for children
         </div>
       </Navigation>
+    </div>
+  );
+}
+
+export default function Home() {
+  // const [user, setUser] = React.useState<User>();
+  const { showSunnyDays, activeCityIds } = useSelectedPeriod();
+
+  return (
+    <div className="min-h-screen  w-full bg-gradient-to-br from-gray-100 to-gray-200">
+      {/* Demo content to enable scrolling */}
+      <div className="h-screen px-0 py-0 flex-col items-center justify-center">
+        <HeaderFull user={undefined} />
+        <div className=" grid grid-cols-12 gap-0 h-[calc(100dvh-65px-40px)]">
+          <div className="col-span-12 md:col-span-4 bg-blue-200/40 px-0 py-0">
+            <WeatherLegend className="bg-accent_ bg-blue-50/50 text-white_ border-b pt-1 rounded-t-lg__ mb-4 px-2  ">
+              {/* <ShowSunnyDaysToggle className="col-span-7 pt-3 text-accent-foreground text-xs" /> */}
+            </WeatherLegend>
+
+            <SidebarTabs
+              showSunnyDays={showSunnyDays}
+              activeCityIds={activeCityIds}
+            />
+          </div>
+          <div className="col-span-12 md:col-span-8 bg-blue-200/40">
+            <MapboxExample />
+          </div>
+        </div>
+      </div>
+
+      <ScrollNavbar />
+
+      <section
+        id="section2"
+        className="h-screen w-full bg-gradient-to-br from-gray-500 to-gray-700 flex items-center justify-center"
+      >
+        <div className="text-center text-white">
+          <WeatherCitiesList />
+        </div>
+      </section>
+
+      <section
+        id="section3"
+        className="h-screen w-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center"
+      >
+        <div className="text-center text-white">
+          <WeatherLegend2 />
+        </div>
+      </section>
     </div>
   );
 }

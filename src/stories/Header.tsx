@@ -25,7 +25,7 @@ export interface HeaderProps {
 }
 
 export const Header = ({ user }: HeaderProps) => (
-  <header>
+  <header className="">
     <div className="storybook-header grid grid-cols-12 gap-8">
       <div className="flex items-center justify-start col-span-4">
         <Logo>
@@ -48,6 +48,40 @@ export const Header = ({ user }: HeaderProps) => (
         </div>
         <div className="flex items-center gap-4">
           <Searchbox />
+          {user ? <></> : <></>}
+          <Button variant="secondary" className="flex items-center gap-2">
+            Login
+          </Button>
+        </div>
+      </div>
+    </div>
+  </header>
+);
+
+export const HeaderFull = ({ user }: HeaderProps) => (
+  <header className="">
+    <div className=" grid grid-cols-12 gap-0">
+      <div className="flex items-center justify-start col-span-4  bg-gray-200_ pl-4">
+        <Logo>
+          <LogoLabel />
+        </Logo>
+      </div>
+      <div className="flex grow justify-between items-center col-span-8 pr-4  gap-4 bg-gray-200_">
+        <div className="flex items-center gap-2 mt-0 px-0 py-3 bg-accent_ rounded-lg">
+          {/* <Info
+            className="hidden text-gray-5300 w-4 h-4 stroke-1"
+            aria-label="Info"
+          /> */}
+          <div className="text-gray-800 text-sm italic ">
+            Icons &nbsp;
+            <WeatherIconCool className="w-5 h-5" />{" "}
+            <WeatherIconMild className="w-5 h-5" />{" "}
+            <WeatherIconWarm className="w-5 h-5" />
+            &nbsp; denote pleasant, comfortable weather.
+          </div>
+        </div>
+        <div className="flex items-center gap-4">
+          {/* <Searchbox /> */}
           {user ? <></> : <></>}
           <Button variant="secondary" className="flex items-center gap-2">
             Login

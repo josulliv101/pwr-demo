@@ -223,7 +223,7 @@ export default function SlidingPopupButtons({
       const containerRect = container.getBoundingClientRect();
       const buttonRect = activeButtonElement.getBoundingClientRect();
 
-      const popupWidth = 320; // w-80 = 320px
+      const popupWidth = 154; // w-80 = 320px
       const halfOffset =
         activeButton.half === "first"
           ? -buttonRect.width / 4
@@ -345,7 +345,7 @@ export default function SlidingPopupButtons({
 
       {/* Popup Box */}
       <div
-        className="absolute top-full mt-3 bg-blue-500 text-white rounded-lg shadow-lg px-3 py-2 w-48 transition-all duration-300 ease-out z-10"
+        className="absolute top-full mt-3 bg-blue-500_ bg-black text-white rounded-lg shadow-lg px-3 py-2 w-[154px] transition-all duration-300 ease-out z-10"
         style={{
           left: `${popupPosition.left}px`,
         }}
@@ -366,14 +366,14 @@ export default function SlidingPopupButtons({
 
         {/* Arrow pointing up */}
         <div
-          className="absolute bottom-full w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-blue-500 transition-all duration-300 ease-out"
+          className="absolute bottom-full w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-black transition-all duration-300 ease-out"
           style={{
             left: `${popupPosition.arrowLeft}px`,
             transform: "translateX(-50%)",
           }}
         />
         <div
-          className="absolute bottom-full w-0 h-0 border-l-7 border-r-7 border-b-7 border-l-transparent border-r-transparent border-b-blue-500 mb-px transition-all duration-300 ease-out"
+          className="absolute bottom-full w-0 h-0 border-l-7 border-r-7 border-b-7 border-l-transparent border-r-transparent border-b-black mb-px transition-all duration-300 ease-out"
           style={{
             left: `${popupPosition.arrowLeft}px`,
             transform: "translateX(-50%)",
