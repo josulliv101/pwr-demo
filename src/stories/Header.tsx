@@ -59,7 +59,7 @@ export const Header = ({ user }: HeaderProps) => (
 );
 
 export const HeaderFull = ({ user }: HeaderProps) => (
-  <header className="">
+  <header className="hidden sm:block">
     <div className=" grid grid-cols-12 gap-0">
       <div className="flex items-center justify-start col-span-4  bg-gray-200_ pl-4">
         <Logo>
@@ -67,7 +67,7 @@ export const HeaderFull = ({ user }: HeaderProps) => (
         </Logo>
       </div>
       <div className="flex grow justify-between items-center col-span-8 pr-4  gap-4 bg-gray-200_">
-        <div className="flex items-center gap-2 mt-0 px-0 py-3 bg-accent_ rounded-lg">
+        <div className="flex opacity-0 md:opacity-100 items-center gap-2 mt-0 px-0 py-3 bg-accent_ rounded-lg">
           {/* <Info
             className="hidden text-gray-5300 w-4 h-4 stroke-1"
             aria-label="Info"

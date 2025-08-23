@@ -69,7 +69,7 @@ export default function WeatherLegend({
       </div>
 
       <TooltipProvider>
-        <div className="shadow-sm__ border-0 px-0 rounded-lg grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-0 max-w-6xl mx-auto">
+        <div className="shadow-sm__ border-0 px-0 rounded-lg grid grid-cols-7   gap-0 max-w-6xl mx-auto">
           {Object.entries(weatherIconMap2).map(
             ([key, { label, component: IconComponent }]) => {
               const details =

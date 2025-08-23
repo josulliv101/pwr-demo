@@ -129,9 +129,9 @@ export default function Home() {
       {/* Demo content to enable scrolling */}
       <div className="h-screen px-0 py-0 flex-col items-center justify-center">
         <HeaderFull user={undefined} />
-        <div className=" grid grid-cols-12 gap-0 h-[calc(100dvh-65px-40px)]">
-          <div className="col-span-12 md:col-span-4 bg-blue-200/40 px-0 py-0">
-            <WeatherLegend className="bg-accent_ bg-blue-50/50 text-white_ border-b pt-1 rounded-t-lg__ mb-4 px-2  ">
+        <div className="grid grid-cols-12 gap-0 h-[calc(100dvh-0px-40px)]  xs:h-[calc(100dvh-65px-40px)]">
+          <div className="hidden lg:block  col-span-12  lg:col-span-4 bg-blue-200/40 px-0 py-0">
+            <WeatherLegend className="hidden lg:block bg-accent_ bg-blue-50/50 text-white_ border-b pt-1 rounded-t-lg__ mb-4 px-2  ">
               {/* <ShowSunnyDaysToggle className="col-span-7 pt-3 text-accent-foreground text-xs" /> */}
             </WeatherLegend>
 
@@ -140,7 +140,7 @@ export default function Home() {
               activeCityIds={activeCityIds}
             />
           </div>
-          <div className="col-span-12 md:col-span-8 bg-blue-200/40">
+          <div className="col-span-12   lg:col-span-8 bg-blue-200/40">
             <MapboxExample />
           </div>
         </div>
