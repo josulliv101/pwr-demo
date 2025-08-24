@@ -87,7 +87,7 @@ export default function WeatherLegend({
                         />
                         {showSunnyIcon && <IconComponent dot />}
                       </div>
-                      <span className="text-[11px] font-medium text-gray-700 text-center break-words whitespace-break-spaces py-1">
+                      <span className="text-[11px] font-medium text-gray-700 text-center break-words whitespace-nowrap pb-2 truncate">
                         {label}
                       </span>
                     </div>

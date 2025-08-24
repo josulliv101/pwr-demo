@@ -59,7 +59,7 @@ export const Header = ({ user }: HeaderProps) => (
 );
 
 export const HeaderFull = ({ user }: HeaderProps) => (
-  <header className="hidden sm:block">
+  <header className="hidden sm:block max-h-12 relative -top-2">
     <div className=" grid grid-cols-12 gap-0">
       <div className="flex items-center justify-start col-span-4  bg-gray-200_ pl-4">
         <Logo>
@@ -72,11 +72,11 @@ export const HeaderFull = ({ user }: HeaderProps) => (
             className="hidden text-gray-5300 w-4 h-4 stroke-1"
             aria-label="Info"
           /> */}
-          <div className="text-gray-800 text-sm italic ">
+          <div className="text-gray-800 text-sm italic px-6">
             Icons &nbsp;
-            <WeatherIconCool className="w-5 h-5" />{" "}
-            <WeatherIconMild className="w-5 h-5" />{" "}
-            <WeatherIconWarm className="w-5 h-5" />
+            <WeatherIconCool className="w-4 h-4  rounded-[4px]" />{" "}
+            <WeatherIconMild className="w-4 h-4 rounded-[4px]" />{" "}
+            <WeatherIconWarm className="w-4 h-4  rounded-[4px]" />
             &nbsp; denote pleasant, comfortable weather.
           </div>
         </div>
