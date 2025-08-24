@@ -480,7 +480,7 @@ const MapboxExample = () => {
       <div
         ref={mapContainerRef}
         // style={{ flex: 1 }}
-        className="map-container rounded-b-lg h-[calc(100%-0px)] w-full"
+        className="map-container rounded-b-lg h-[calc(100dvh-0px)] w-full"
       />
       {/* <div className="min-w-[310px] w-[310px] border-0 bg-blue-500 font-semibold text-accent text-3xl px-5 py-3 absolute top-16 right-2 rounded-sm">
         <div className="text-xs opacity-75">
